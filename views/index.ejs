@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+    <%- include('./partials/head') %>
+
+    <body>
+        <div class="index-container">
+            
+            <% for(let i=0; i < recipes.length; i++) { %>
+
+            <div class="index-item">
+
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" alt="Chai Oatmeal" />
+                
+                <article>
+                    <h2><%=recipes[i].name%></h2>
+
+                    <ul>
+                        <li><i class="fas fa-user"></i><span><%=recipes[i].serves%> </span></li>
+                        <li><i class="far fa-clock"></i><span><%=recipes[i].time%> mins</span></li>
+                        <li><span><%=recipes[i].difficulty%></span></li>
+                        <% if(recipes[i].reviews.length > 0) { %>
+                            <% let reviews = recipes[i].reviews %>
+                            <% let averageReviews = 0 %>
+                            <% reviews = reviews.reduce(function(a, b){ %>
+                               <% return a + b; %>
+                            <% }, 0) %>
+                            <% averageReviews = sumReviews/reviews.length %>    
+
+
+                            <li><span><%= averageReviews %></span></li>
+                        
+                        <% } %>
+                        
+                    </ul>
+                        <% let ingredients = [] %>
+                        <%for (let j = 0;  j < recipes[i].ingredient.length; j++) { %>                            
+                            <% ingredients.push(recipes[i].ingredient[j].item) %>
+                        <% } %>    
+                    
+
+                    <p><%= recipes[i].summary %></p>
+
+                    <p><span class="bold">Ingredients:&nbsp;</span><%= ingredients.join(', ')%></p>
+                   
+                </article>
+
+            
+            </div>
+            <% } %>
+                
+
+        </div>
+
+        
+    </body>
+
+
+</html>
