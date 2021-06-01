@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { RecipeModel } = require ('./models/recipe')
 
+mongoose.set('useCreateIndex', true)
 const mongoURI = 'mongodb://localhost:27017/Recipe'
 
 let data = [
@@ -8,10 +9,11 @@ let data = [
     {
         name: 'Nasi Goreng',
         cuisine: 'Asian',
-        shared_by: "lookie",
+        user_id: "Admin",
+        credit: "lookie",
         serves: 1,
         time: 30,        
-        difficulty: "beginner",
+        difficulty: "easy",
         summary: "Fried rice Singaporean style. Topped with anchovies to give a full flavours",
         ingredient: [
             {item: "chilli padi", quantity: "14oz"},
@@ -30,10 +32,11 @@ let data = [
     { 
         name: 'Inside Out Beef Cheeseburgers',
         cuisine: 'Western',
-        shared_by: "https://eatineatout.ca/inside-out-beef-cheeseburgers/",
+        user_id: "admin",
+        credit: "https://eatineatout.ca/inside-out-beef-cheeseburgers/",
         serves: 1,
         time: 60,
-        difficulty: "beginner",
+        difficulty: "medium",
         summary: "Beef burgers are a great way to whip up a fast and totally delicious meal the whole family will love. There’s a big difference with these beef cheeseburgers, they’re inside out! All the yummy bacon and cheese is inside the patty, making it moist and totally irresistible",
         ingredient: [
             {item: "Lean Ground Beef", quantity: "500g"},

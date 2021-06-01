@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <%- include('./partials/head') %>
+
+    <body>
+        <h1>Upload your own recipe!</h1>
+
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Name of Dish</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Required">
+            </div>
+            <div class="col-md-6">
+                <label for="credit" class="form-label">Credit</label>
+                <input type="text" class="form-control" id="name" name="credit">
+            </div>
+            <div class="col-md-2">
+                <label for="cuisine" class="form-label">Cuisine Type</label>
+                <select id="cuisine" class="form-select" name="cuisine">
+                    <option selected>Choose...</option>
+                        <option value="chinese">Chinese</option>
+                        <option value="malay">Malay</option>
+                        <option value="indian">Indian</option>
+                        <option value="french">French</option>
+                        <option value="western">Asian</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="serves" class="form-label">Serves</label>
+                <select id="serves" class="form-select" name="serves">
+                    <option selected>Choose...</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value=">4">5 or more</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="difficulty" class="form-label">Difficulty</label>
+                <select id="difficulty" class="form-select" name="difficulty">
+                    <option selected>Choose...</option>
+                      <option value="easy">Beginner</option>
+                      <option value="medium">Medium</option>
+                      <option value="Hard">Hard</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="time" class="form-label">Time Taken</label>
+                <select id="time" class="form-select" name="time">
+                    <option selected>Choose...</option>
+                      <option value="30 mins">30 Mins</option>
+                      <option value="1 hr">1 Hour</option>
+                      <option value="1 hr 30 mins">1 Hour 30 mins</option>
+                      <option value="2 hrs">2 Hours</option>
+                      <option value="2 hrs 30 mins">2 Hour 30 mins</option>
+                      <option value="3 hrs">3 Hours</option>
+                      <option value="> 3hrs">More than 3 hours</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="summary" class="form-label">Brief Summary of the Dish</label>
+                <textarea class="form-control" id="summary" rows="3" name="summary"></textarea>
+            </div>
+
+            <section>
+                <h3> Ingredient List</h3>
+                
+                <section id="ingredient-list">                    
+                    <div class="col-md-6" style="display: inline-block;">
+                        <label for="item" class="form-label">Ingredient</label>
+                        <input type="text" class="form-control ingredient-item" id="item" name="item" placeholder="Required">
+                    </div>
+                    <div class="col-md-2" style="display: inline-block;">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="text" class="form-control ingredient-qty" id="amount" name="amount">
+                    </div>
+                </section>
+                <button type="button" class="btn btn-outline-primary" style="width: max-content;" id="add-ingredient">Add</button>
+                <button type="button" class="btn btn-outline-danger" style="width: max-content;" id="del-ingredient">Delete</button>
+            </section>
+
+            <section>
+                <h3> How To Cook</h3>
+                <section id="preparation">
+                    <table id="prep-steps">
+                        <tr>
+                            <td> 1 </td>
+                            <td> <input type="text" name="toDo"> </td>
+                        </tr>
+                    </table>
+                    
+                <button type="button" class="btn btn-outline-primary" style="width: max-content;" id="add-steps">Add</button>
+                <button type="button" class="btn btn-outline-danger" style="width: max-content;" id="delete-steps">Delete</button>
+            </section>
+           
+
+        </form>
+    
+    <!-- Script file to work with the add additonal input field buttons -->
+        <script > 
+            <%- include("../scripts/new-recipe.js") %> 
+        </script> 
+
+    </body>
+
+   
+</html>

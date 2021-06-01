@@ -28,6 +28,44 @@ app.use(methodOverride('_method'))
 // index
 app.get('/home', recipeController.index)
 
+// new
+app.get('/recipes/new', recipeController.newForm)
+
+// show
+app.get('/recipes/:user_id/:id', recipeController.show)
+
+// // create
+// app.post('/recipes', recipeController.create)
+
+// // edit
+// app.get('/recipes/:slug/edit', recipeController.editForm)
+
+// // update
+// app.patch('/recipes/:slug', recipeController.update)
+
+// // delete
+// app.delete('/recipes/:slug', recipeController.delete)
+
+// product rating routes
+
+// app.get('/recipes/:slug/ratings/new', productRatingController.newForm)
+
+// app.post('/recipes/:slug/ratings', productRatingController.create)
+
+// users
+
+// app.get('/users/register', guestOnlyMiddleware, userController.registerForm)
+
+// app.post('/users/register', guestOnlyMiddleware,  userController.registerUser)
+
+// app.get('/users/login', guestOnlyMiddleware, userController.loginForm)
+
+// app.post('/users/login', guestOnlyMiddleware, userController.loginUser)
+
+// app.get('/users/dashboard', authenticatedOnlyMiddleware, userController.dashboard)
+
+// app.post('/users/logout', authenticatedOnlyMiddleware, userController.logout)
+
 // =======================================
 //              LISTENER
 // =======================================

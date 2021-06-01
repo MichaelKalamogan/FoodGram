@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+    
     <%- include('./partials/head') %>
 
     <body>
@@ -15,10 +15,17 @@
                 <article>
                     <h2><%=recipes[i].name%></h2>
 
-                    <ul>
-                        <li><i class="fas fa-user"></i><span><%=recipes[i].serves%> </span></li>
-                        <li><i class="far fa-clock"></i><span><%=recipes[i].time%> mins</span></li>
-                        <li><span><%=recipes[i].difficulty%></span></li>
+                    <ul class="snapshot">
+                        <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipes[i].serves%> </span></li>
+                        <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipes[i].time%> mins</span></li>
+                        <% if(recipes[i].difficulty === 'easy') { %>
+                        <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
+                        <% } else if(recipes[i].difficulty === 'medium') { %>
+                            <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
+                        <% } else if(recipes[i].difficulty === 'hard') { %>
+                            <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
+                        <% } %>
+                        
                         <% if(recipes[i].reviews.length > 0) { %>
                             <% let reviews = recipes[i].reviews %>
                             <% let averageReviews = 0 %>
@@ -28,7 +35,7 @@
                             <% averageReviews = sumReviews/reviews.length %>    
 
 
-                            <li><span><%= averageReviews %></span></li>
+                            <li class="snapshot"><span><%= averageReviews %></span></li>
                         
                         <% } %>
                         
@@ -42,10 +49,10 @@
                     <p><%= recipes[i].summary %></p>
 
                     <p><span class="bold">Ingredients:&nbsp;</span><%= ingredients.join(', ')%></p>
-                   
+                    
                 </article>
-
-            
+                <a href="/recipes/<%= recipes[i].user_id%>/<%= recipes[i]._id%>" id="index-show">Show Me More!</a>
+               
             </div>
             <% } %>
                 

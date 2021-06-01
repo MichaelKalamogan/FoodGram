@@ -1,5 +1,5 @@
 body {
- background-color: cornflowerblue;
+ background-color:whitesmoke;
 }
 
 .index-container {
@@ -17,9 +17,9 @@ body {
     background-color: white; 
 	font-size: 16px;
     text-align: center;
-    border-radius: 5px;
-    box-shadow: 3px 5px 20px 1px grey ;
+    box-shadow: 3px 5px 20px 1px black ;
     margin: auto;
+    
   }
 
   .index-item article {
@@ -39,22 +39,36 @@ body {
     font-weight: 300;
 }
 
-.index-item ul {
-    padding-left: 0;
-}
-
-.index-item i {
+.iconify {
     color: #4267B2;
     padding-right: 2px;
 }
 
-.index-item li {
+.snapshot {
 	display: inline;
 	display: inline-block;
     margin-right: 8px;
-
+    padding-left: 0;
 }
 
 .bold {
     font-weight: bold;
+}
+
+#index-show {
+    display: block;
+    background: grey;
+    color: white;
+    position: relative;
+    padding: 10px;
+    text-decoration: none;
+}
+
+#show-header {
+    display: flex;
+}
+#show-aside {
+    width: 30%;
+    border: 1px solid black;
+    margin-left: 10px;
 }
