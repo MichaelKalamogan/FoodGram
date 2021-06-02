@@ -19,7 +19,7 @@ module.exports = {
     },
 
     newForm: (req, res) => {
-        res.render('new')
+        res.render('newform')
     },
 
     show: async(req, res) => {
@@ -38,5 +38,46 @@ module.exports = {
             .then(recipe => {
                 res.render('show', { recipe : recipeReq })
             })
+    },
+
+    create: (req, res) => {
+
+        let newIngredient = []
+        
+        for (let i = 0; i < req.body.ingredient.length; i++) {
+            newIngredient.push({"item":req.body.ingredient[i]})
+        }
+        
+        let newInstructions = []
+        
+        for(let i =0; i< req.body.instruction.length; i++) {
+            newInstructions.push({"toDo": req.body.instruction[i]})
+        }      
+        
+
+        RecipeModel.create({
+
+            name: req.body.name,
+            cuisine: req.body.cuisine,
+            user_id: 'Admin4',
+            credit: req.body.credit,
+            serves: req.body.serves,
+            difficulty: req.body.difficulty,
+            time: req.body.time,
+            summary: req.body.summary,
+            ingredient: newIngredient,            
+            instruction: newInstructions
+        })
+            .then(createResp => {
+                console.log(newModel.user_id)
+
+            })
+            .then(createResp =>{
+                let newId = newModel._id
+                let user = newModel.user_id
+                
+                res.redirect(`/recipes/${user}/${newId}`)
+            })
+
     }
 }

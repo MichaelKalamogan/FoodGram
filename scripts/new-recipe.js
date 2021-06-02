@@ -1,6 +1,9 @@
+// JS script file for newform.ejs
+
 window.onload = () => {
     
     let ingredientList = document.getElementById('ingredient-list')
+    let preparationList = document.getElementById('preparation')
     
     //buttons in new.ejs
     let addIngredientButton = document.getElementById('add-ingredient')
@@ -8,10 +11,8 @@ window.onload = () => {
     let addCookingStepsButton = document.getElementById('add-steps')
     let delCookingStepsButton =  document.getElementById('delete-steps')
 
-
-   
-
-    //When the user clicks the add button, a new input box shoule be created
+    //When the user clicks the add button, a new input box should be created
+    let ingredientRow = 1 
     addIngredientButton.onclick = (event) => {
 
         event.preventDefault();
@@ -23,60 +24,72 @@ window.onload = () => {
         //create the new input field for ingredient.item
         let newIngredientItem = document.createElement('input')
         newIngredientItem.setAttribute('type', 'text')
-        newIngredientItem.setAttribute('class', 'form-control ingredient-item')
-        newIngredientItem.setAttribute('name','item')
-        
+        newIngredientItem.setAttribute('class', 'col-md-6 form-control ingredient-item')
+        newIngredientItem.setAttribute('name','ingredient[]')
+        newIngredientItem.setAttribute('placeholder', 'Next Ingredient')
         //Append item input field to div
         newIngredientItemDiv.appendChild(newIngredientItem);
 
         //create the new div for ingredient.qty
-        let newIngredientQtyDiv = document.createElement('div')
-        newIngredientQtyDiv.setAttribute('class', 'col-md-2')
+        // let newIngredientQtyDiv = document.createElement('div')
+        // newIngredientQtyDiv.setAttribute('class', 'col-md-2')
 
         //create the new input field for ingredient.item
-        let newIngredientQty = document.createElement('input')
-        newIngredientQty.setAttribute('type', 'text')
-        newIngredientQty.setAttribute('class', 'form-control ingredient-qty')
-        newIngredientQty.setAttribute('name','amount')
+        // let newIngredientQty = document.createElement('input')
+        // newIngredientQty.setAttribute('type', 'text')
+        // newIngredientQty.setAttribute('class', 'col-md-2 form-control ingredient-qty')
+        // newIngredientQty.setAttribute('name','ingredientQuantity[]')
+        // newIngredientQty.setAttribute('placeholder','Quantity')
 
         //Append quantity input field to div
-        newIngredientQtyDiv.appendChild(newIngredientQty)
+        // newIngredientQtyDiv.appendChild(newIngredientQty)
         
         //append new Ingredient item div to section
         ingredientList.appendChild(newIngredientItemDiv)
 
         //append new Ingredient quantity div to section
-        ingredientList.appendChild(newIngredientQtyDiv)
+        // ingredientList.appendChild(newIngredientQtyDiv)
+
+        //add to the ingredient row variable
+        ingredientRow++;
     }
 
+    //When the user clicks the add steps button, a new input box should be created
+    let cookingStep = 1
+    
     addCookingStepsButton.onclick = (event) => {
-
+        
         event.preventDefault();
 
-         //table variables
-        let table = document.getElementById('prep-steps')
-        let rowCount = table.rows.length
+        //to cooking step variable to keep track of step no.    
+        cookingStep++;
 
-        //creating new row 
-        let newRow = document.createElement('tr')
-        let newColumn = document.createElement('td')
-        let newInputCol = document.createElement('td')
-        let newInput = document.createElement('input')
-        newInput.setAttribute('type', 'text')
-        newInput.setAttribute('name','toDo')
+        //create new step div (number)
+        let newStepDiv = document.createElement('div')
+        let newh4 = document.createElement('h4')
+        newh4.setAttribute('class', 'step')      
+        newh4.innerText = cookingStep + '.'
 
-        //appending input field to column
-        newInputCol.appendChild(newInput)
+        //append h4 to steps div
+        newStepDiv.appendChild(newh4)
 
-        //creating number field for first column
-        newColumn.innerHTML = rowCount + 1
+        //create new steps input div
+        let newStepInputDiv = document.createElement('div')
+        newStepInputDiv.setAttribute('class', 'col-md-7')
 
-        //appending columns to row
-        newRow.appendChild(newColumn)
-        newRow.appendChild(newInputCol)
+        //create steps input
+        let newStepInput = document.createElement('input')
+        newStepInput.setAttribute('type', 'text')
+        newStepInput.setAttribute('class', 'col-md-7 form-control')
+        newStepInput.setAttribute('name', 'instruction[]')
+        newStepInput.setAttribute('placeholder', 'Next Step to Take')
 
-        //append new row to table
-        table.append(newRow)    
+        //append steps input to dteps div
+        newStepInputDiv.appendChild(newStepInput)
+
+        //append to html
+        preparationList.appendChild(newStepDiv)
+        preparationList.appendChild(newStepInputDiv)
 
     }
 
@@ -85,30 +98,30 @@ window.onload = () => {
 
         event.preventDefault();
 
+        //remove ingredient and quantity
         ingredientList.removeChild(ingredientList.lastElementChild)
         ingredientList.removeChild(ingredientList.lastElementChild)
 
+        if (ingredientRow > 0) {
+            ingredientRow--;
+        }
     }
 
 
     delCookingStepsButton.onclick = (event) => {
 
-        event.preventDefault();
-        
-        //table variables
-        let table = document.getElementById('prep-steps')
-        let rowCount = table.rows.length
+        if (cookingStep > 1) {
+            cookingStep--;
 
-        if (rowCount > 1) {
+        //remove input and step number
+        preparationList.removeChild(preparationList.lastElementChild)
+        preparationList.removeChild(preparationList.lastElementChild)
 
-            let lastRow = table.lastElementChild
-            table.removeChild(lastRow)
-
-        } else if (rowCount === 1) {
-
-            alert('Require at least one step')
+        } else {
+            alert("nothing to delete")
+            return
         }
-       
+
     }
 
 

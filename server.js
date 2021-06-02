@@ -26,7 +26,7 @@ app.use(methodOverride('_method'))
 // =======================================
 
 // index
-app.get('/home', recipeController.index)
+app.get('/recipes/home', recipeController.index)
 
 // new
 app.get('/recipes/new', recipeController.newForm)
@@ -34,8 +34,8 @@ app.get('/recipes/new', recipeController.newForm)
 // show
 app.get('/recipes/:user_id/:id', recipeController.show)
 
-// // create
-// app.post('/recipes', recipeController.create)
+// create
+app.post('/recipes', recipeController.create)
 
 // // edit
 // app.get('/recipes/:slug/edit', recipeController.editForm)

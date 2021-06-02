@@ -3,20 +3,14 @@ const mongoose= require('mongoose')
 const recipeSchema = new mongoose.Schema ({
     name: { type: String, required: true },
     cuisine: { type: String, required: true },
-    user_id: {type: String, required: true, unique: true},
+    user_id: {type: String, required: true},
     credit: { type: String, required: true},
-    serves: { type: Number, required: true },
+    serves: { type: String, required: true },
     difficulty: { type: String, required: true },
-    time: { type: Number, required: true },
+    time: { type: String, required: true },
     summary: { type: String, required: true },
-    ingredient: [{ 
-        item: { type: String }, 
-        quantity: {type: String}
-    }],
-    instruction: [{
-        step: { type: Number },
-        toDo: { type: String }
-    }],
+    ingredient: [{item: {type: String}}],
+    instruction: [{toDo : {type: String}}],
 
     reviews: [{
         rating: { type: Number },

@@ -22,9 +22,9 @@ let data = [
         ],
 
         instruction: [
-            {step: 1, toDo: "pan Fry for 15 minutes"},
-            {step: 2, toDo: 'stir fry for 16 minutes'},
-            {step: 3, toDo: 'pour water and let it steam'}
+            {toDo: "pan Fry for 15 minutes"},
+            {toDo: 'stir fry for 16 minutes'},
+            {toDo: 'pour water and let it steam'}
         ],
         reviews: []
     },
@@ -50,9 +50,9 @@ let data = [
         ],
 
         instruction: [
-            {step: 1, toDo: "Combine beef, egg, garlic, cheese, bacon, bread crumbs, onion, Worcestershire sauce and rosemary in bowl."},
-            {step: 2, toDo: 'Divide meat into 6 portions. Form into ¾ inch (2 cm) thick patties. Make thumb-print depression in centre of each patty (to prevent rounding while they grill). Make Ahead: Refrigerate, covered, for 1 hour or up to 1 day'},
-            {step: 3, toDo: 'Grill over medium heat on preheated, oiled grill for 5 to 7 minutes per side, testing doneness with a digital instant read thermometer inserted sideways into centre of each patty to ensure patties are cooked to 160°F (71°C)'}
+            {toDo: "Combine beef, egg, garlic, cheese, bacon, bread crumbs, onion, Worcestershire sauce and rosemary in bowl."},
+            {toDo: 'Divide meat into 6 portions. Form into ¾ inch (2 cm) thick patties. Make thumb-print depression in centre of each patty (to prevent rounding while they grill). Make Ahead: Refrigerate, covered, for 1 hour or up to 1 day'},
+            {toDo: 'Grill over medium heat on preheated, oiled grill for 5 to 7 minutes per side, testing doneness with a digital instant read thermometer inserted sideways into centre of each patty to ensure patties are cooked to 160°F (71°C)'}
         ],
         reviews: []  
     }
