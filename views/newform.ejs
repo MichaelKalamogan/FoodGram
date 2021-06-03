@@ -8,7 +8,7 @@
     
     
     <body>
-        
+        <%- include('./partials/nav') %>
         <form class="row g-3" method="POST" action="/recipes">
 
             <h1>Upload your own recipe!</h1>
@@ -43,8 +43,8 @@
                 <div class="col-md-2">
                     <select class="form-select" name="difficulty">
                         <option selected>Difficulty</option>
-                          <option value="easy">Beginner</option>
-                          <option value="medium">Medium</option>
+                          <option value="Easy">Beginner</option>
+                          <option value="Medium">Medium</option>
                           <option value="Hard">Hard</option>
                     </select>
                 </div>

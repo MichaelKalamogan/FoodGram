@@ -3,7 +3,7 @@
     <%- include('./partials/head') %>
 
     <body>
-
+        <%- include('./partials/nav') %>
         <h1><%=recipe.name%></h1>
 
         <div id="show-header">  
@@ -19,11 +19,11 @@
             <ul class="snapshot">
                 <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipe.serves%> </span></li>
                 <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipe.time%></span></li>
-                <% if(recipe.difficulty === 'easy') { %>
+                <% if(recipe.difficulty === 'Easy') { %>
                 <li class="snapshot" ><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
-                <% } else if(recipe.difficulty === 'medium') { %>
+                <% } else if(recipe.difficulty === 'Medium') { %>
                     <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
-                <% } else if(recipe.difficulty === 'hard') { %>
+                <% } else if(recipe.difficulty === 'Hard') { %>
                     <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
                 <% } %>
                 

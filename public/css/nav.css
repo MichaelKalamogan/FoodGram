@@ -1,11 +1,13 @@
-.nav-bar {
+.primary-navigation {
       margin: 0 auto;
+      padding: 20px 0 10px 0;
       display: block;
       text-align: center;
       font-size: 16px;
-}
+      background-color: white;
+} 
 
-ul li{
+.main-link{
     list-style: none;
     margin: 0 auto;
     border-left: 2px solid #3ca0e7;
@@ -17,19 +19,20 @@ ul li{
     font-family: arvo, serif;
 }
   
-li a {
+.main-link a {
     color: black;
+    text-decoration: none;
 }
   
-li a:hover {
-    color: #3ca0e7;
+.main-link a:hover {
+    color:cornflowerblue;
 }
   
-li:hover {
+.main-link:hover {
     cursor: pointer;
 }
   
-ul li ul {
+.dropdown {
     visibility: hidden;
     opacity: 0;
     position: absolute;
@@ -39,8 +42,8 @@ ul li ul {
     background: white;
 }
   
-ul li:hover > ul,
-ul li ul:hover {
+.main-link:hover > ul,
+.dropdown:hover {
     visibility: visible;
     opacity: 1;
     display: block;
@@ -50,32 +53,20 @@ ul li ul:hover {
     box-shadow: 0px 3px 5px -1px #ccc;
 }
   
-ul li ul li {
+.dropdown li {
     clear: both;
     width: 100%;
     text-align: left;
     margin-bottom: 20px;
-    border-style: none;
+    border-style: none
 }
   
-ul li ul li a:hover {
+.dropdown li a:hover {
     padding-left: 10px;
     border-left: 2px solid #3ca0e7;
     transition: all 0.3s ease;
 }
 
-  
-  a {
-  
-      text-decoration: none;
-  
-      &:hover {
-          color: #3CA0E7;
-      }
-   
-  }
-  
-   ul li ul li a { transition: all 0.5s ease; }
 
   
   
