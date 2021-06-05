@@ -4,29 +4,45 @@
 
     <body>
         <%- include('./partials/nav') %>
-        <h1><%=recipe.name%></h1>
 
-        <div id="show-header">  
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" alt="Chai Oatmeal" id="show-image"/>
-             <aside id="show-aside">
-                 <h2>Reviews</h2>
-                 <h3>Remember to input the reviews and a scroll bar</h3>
-             </aside>
-        
-        </div>
-        
-        <div>
-            <ul class="snapshot">
-                <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipe.serves%> </span></li>
-                <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipe.time%></span></li>
-                <% if(recipe.difficulty === 'Easy') { %>
-                <li class="snapshot" ><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
-                <% } else if(recipe.difficulty === 'Medium') { %>
-                    <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
-                <% } else if(recipe.difficulty === 'Hard') { %>
-                    <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
-                <% } %>
-                
+        <div class="container">
+            <h1 id="main-name"><%=recipe.name%></h1>
+
+            <div id="show-header" class="container">  
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" alt="Chai Oatmeal" id="show-image"/>
+                 <aside id="show-aside">
+                     <h2>Reviews</h2>
+                     <h3>Remember to input the reviews and a scroll bar</h3>
+                 </aside>
+            
+            </div>
+            
+            <div>
+                <ul class="snapshot">
+                    <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipe.serves%> </span></li>
+                    <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipe.time%></span></li>
+                    <% if(recipe.difficulty === 'Easy') { %>
+                    <li class="snapshot" ><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                    <% } else if(recipe.difficulty === 'Medium') { %>
+                        <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                    <% } else if(recipe.difficulty === 'Hard') { %>
+                        <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                    <% } %>
+                    
+                    <% if(recipe.reviews.length > 0) { %>
+                        <% let reviews = recipe.reviews %>
+                        <% let averageReviews = 0 %>
+                        <% reviews = reviews.reduce(function(a, b){ %>
+                           <% return a + b; %>
+                        <% }, 0) %>
+                        <% averageReviews = sumReviews/reviews.length %>    
+    
+    
+                        <li class="snapshot"><span><%= averageReviews %></span></li>
+                    
+                    <% } %>
+                    
+                </ul>
                 <% if(recipe.reviews.length > 0) { %>
                     <% let reviews = recipe.reviews %>
                     <% let averageReviews = 0 %>
@@ -34,54 +50,45 @@
                        <% return a + b; %>
                     <% }, 0) %>
                     <% averageReviews = sumReviews/reviews.length %>    
-
-
+    
+    
                     <li class="snapshot"><span><%= averageReviews %></span></li>
                 
                 <% } %>
-                
-            </ul>
-            <% if(recipe.reviews.length > 0) { %>
-                <% let reviews = recipe.reviews %>
-                <% let averageReviews = 0 %>
-                <% reviews = reviews.reduce(function(a, b){ %>
-                   <% return a + b; %>
-                <% }, 0) %>
-                <% averageReviews = sumReviews/reviews.length %>    
-
-
-                <li class="snapshot"><span><%= averageReviews %></span></li>
+    
+            </div>  
             
-            <% } %>
+    
+            <section>
+                <h2>Ingredients List</h2>
+                <table>
+                    <%for(let i=0; i < recipe.ingredient.length; i++) { %>
+                        <tr>
+                            <td><%= i+1 %>.</td>
+                            <td><%= recipe.ingredient[i].item %></td>
+                            <td><%= recipe.ingredient[i].quantity %></td>
+                        </tr>
+                    <% } %>
+                </table>
+            </section>
+    
+            <section>
+                <h2> How To Cook</h2>
+                <table>
+                    <%for(let i=0; i < recipe.instruction.length; i++) { %>
+                        <tr>
+                            <td><%= recipe.instruction[i].step %>.</td>
+                            <td><%= recipe.instruction[i].toDo %></td>
+                        </tr>
+                    <% } %>
+                </table>
+    
+            </section>
 
-        </div>  
-        
 
-        <section>
-            <h2>Ingredients List</h2>
-            <table>
-                <%for(let i=0; i < recipe.ingredient.length; i++) { %>
-                    <tr>
-                        <td><%= i+1 %>.</td>
-                        <td><%= recipe.ingredient[i].item %></td>
-                        <td><%= recipe.ingredient[i].quantity %></td>
-                    </tr>
-                <% } %>
-            </table>
-        </section>
 
-        <section>
-            <h2> How To Cook</h2>
-            <table>
-                <%for(let i=0; i < recipe.instruction.length; i++) { %>
-                    <tr>
-                        <td><%= recipe.instruction[i].step %>.</td>
-                        <td><%= recipe.instruction[i].toDo %></td>
-                    </tr>
-                <% } %>
-            </table>
+        </div>
 
-        </section>
 
     </body>
 

@@ -1,6 +1,10 @@
 
 <nav role="navigation" class="primary-navigation">
-    <ul class="nav-bar">
+    <span>
+        <h2>FoodGram<span id="copyright" class="iconify" data-icon="bx:bx-copyright" data-inline="true"></span></h2>
+    </span>
+ 
+    <ul id="nav-bar">
         <li class="main-link"><a href="/recipes/home">Home</a></li>
         <li class="main-link"><a href="#">Cuisine&dtrif;</a>
         <ul class="dropdown">
@@ -13,5 +17,19 @@
         <li class="main-link"><a href="/recipes/new">Create Recipe</a></li>
         <li class="main-link"><a href="/about">About</a></li>
         <li class="main-link"><a href="/contact-us">Contact Us</a></li>
+    </ul>
+    
+    <ul class="logout-bar">
+        <% if (!isAuthenticated) { %>
+            <li class="logout-bar"><a href="/user/login">Login</a></li>
+            <li class="logout-bar"><a href="/user/register">Register</a>
+        <% } else { %>
+        
+        <li class="logout-bar">
+            <form method="post" action="/user/logout?_method=DELETE">
+                <button type="submit">Log Out</button>
+            </form>
+        </li>
+        <% } %>
     </ul>
 </nav>

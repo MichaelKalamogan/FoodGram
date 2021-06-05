@@ -1,11 +1,27 @@
 .primary-navigation {
       margin: 0 auto;
       padding: 20px 0 10px 0;
-      display: block;
+      display: flex;
       text-align: center;
       font-size: 16px;
       background-color: white;
 } 
+
+.primary-navigation span {
+    width: 25%;
+    text-align: left;
+    font-size: 1em;
+    padding-left: 10px;
+}
+
+.primary-navigation span h2{
+    font-size: 1.5em;
+    font-variant: small-caps;
+}
+
+#nav-bar{
+    width: 50%;
+}
 
 .main-link{
     list-style: none;
@@ -58,7 +74,9 @@
     width: 100%;
     text-align: left;
     margin-bottom: 20px;
-    border-style: none
+    border-style: none;
+    padding-left: 5px;
+    list-style-type: none;
 }
   
 .dropdown li a:hover {
@@ -67,6 +85,23 @@
     transition: all 0.3s ease;
 }
 
+.logout-bar {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+}
 
+#copyright{
+    color: black;
+    width: 0.55em;
+}
+
+.logout-bar form button {
+    text-decoration: underline;
+    color: grey;
+    background-color: white;
+    border: none;
+}
   
   

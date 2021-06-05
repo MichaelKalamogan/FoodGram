@@ -2,7 +2,7 @@ const { RecipeModel } = require ('../models/recipe')
 
 module.exports = {
 
-    index: async (req, res) => {
+    index: async (req, res, next) => {
         let recipes = []
 
         try {
@@ -12,13 +12,12 @@ module.exports = {
             res.statusCode(500)
             return 'server error'
         }
-
         res.render('index', {
             recipes: recipes,
         })
     },
 
-    newForm: (req, res) => {
+    new: (req, res) => {
         res.render('newform')
     },
 
@@ -79,5 +78,6 @@ module.exports = {
                 res.redirect(`/recipes/${user}/${newId}`)
             })
 
-    }
+    },
+
 }
