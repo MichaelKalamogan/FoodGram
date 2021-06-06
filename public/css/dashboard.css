@@ -1,0 +1,31 @@
+.personal-info {
+    font-weight: bold;
+    background-color: antiquewhite;
+    max-width: fit-content;
+}
+
+.social-icons ul {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.social-icons ul li{
+    list-style: none;
+    padding-right: 5px;
+}
+
+.social-icons .iconify {
+    font-size: 40px;
+}
+
+#userRecipes {
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+
+.recipe-card {
+    margin: 10px auto 30px auto;
+}

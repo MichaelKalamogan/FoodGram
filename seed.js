@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { RecipeModel } = require ('./models/recipe')
 
 mongoose.set('useCreateIndex', true)
-const mongoURI = 'mongodb://localhost:27017/Recipe'
+const mongoURI = 'mongodb://localhost:27017/FoodGram'
 
 let data = [
 

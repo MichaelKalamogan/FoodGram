@@ -1,9 +1,148 @@
 <!DOCTYPE html>
 <html>
     <%- include('./partials/head') %>
+
     <body>
         <%- include('./partials/nav') %>
-        <h1 class="mt-4">Dashboard</h1>
-        <p class="lead mb-3">Welcome <%= name %></p>
+
+        <div class="after-navbar container-fluid">
+            
+            <div class="row gutters-sm">
+                
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <h6 class="personal-info">This is how your profile page will appear to others.</h6>
+                                <img src="/Images/chef.png" alt="Admin" class="square" width="150">
+                                <div class="mt-3">
+                                    <h4><%=user.user_id%></h4>
+                                    <button class="btn btn-primary">Follow</button>
+                                    <button class="btn btn-outline-primary">Message</button>
+                                </div>
+                            </div>
+                            <div class="social-icons">
+                                <ul>
+                                    <li><a href="https://google.com"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                    <li><a href="https://facebook.com"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
+                                    <li><a href="https://instagram.com"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
+                                    <li><a href="https://pinterest.com"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
+                                </ul>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="mb-3">
+                                    <h6 class="personal-info">*This section will not be visible to others*</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%=user.name%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <%=user.email%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Personal Website</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <% if (user.website === "") { %>
+                                            <%= user.website %>
+                                        <% } else { %>
+                                            Please enter your personal website details (if any)                              
+                                    <%}%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Facebook</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <% if (user.facebook === "") { %>
+                                        <%= user.facebook %>
+                                    <% } else { %>
+                                        Please enter your Facebook details (if any)                              
+                                    <%}%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Instagram</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <% if (user.instagram === "") { %>
+                                        <%= user.instagram %>
+                                    <% } else { %>
+                                        Please enter your Instagram details (if any)                              
+                                    <%}%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Pinterest</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <% if (user.pinterest === "") { %>
+                                        <%= user.pinterest %>
+                                    <% } else { %>
+                                        Please enter your Pinterest details (if any)                              
+                                    <%}%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a class="btn btn-info " target="__blank" href="/user/<%=user.user_id%>/dashboard/edit">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+            </div>
+
+            <% if(userRecipes.length > 0) { %>
+            <div class="row" id="userRecipes">
+                <div class="row mb-5">
+                    <h3 class="bold">Your Recipes</h3>
+                </div>
+                       
+                
+                <div class="row">
+                    <%for(let i = 0; i < userRecipes.length; i++) { %>
+                    <div class="card recipe-card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="Picture of the Dish">
+                        <div class="card-body">
+                          <p class="card-text"><%= userRecipes[i].name %></p>
+                        </div>
+                        <div class="row">
+                            <a class="btn btn-info " target="__blank" href="/user/<%= user.user_id%>/<%= userRecipes[i]._id%>/edit">Edit</a>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <% } %>
+        </div>
     </body>
 </html>

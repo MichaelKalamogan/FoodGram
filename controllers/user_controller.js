@@ -1,14 +1,13 @@
 const bcrypt = require('bcryptjs')
 const { UserModel } = require('../models/user')
+const { RecipeModel } = require ('../models/recipe')
+
 const passport = require('passport')
-
-
 
 module.exports = {
 
     //login page for user
-    index: async (req, res) => {
-        let errors = []
+    index: (req, res) => {
 
         res.render('login')
     },
@@ -37,7 +36,7 @@ module.exports = {
             errors.push("Passwords don't match.")
         }
 
-        //showing the users the errors that preventing the registration from beign submitted
+        //showing the users the errors that preventing the registration from being submitted
         if (errors.length > 0) {
 
             //re-render the registration site but keep the details in the form less password
@@ -93,7 +92,7 @@ module.exports = {
                             password: hash
                         })
                             .then(user => {
-                            res.flash()
+                            req.flash('success_message', 'Successfully Registered. Please Login and visit your dashboard to update your profile.')
                             res.redirect('/user/login')
                                 
                             })
@@ -107,12 +106,25 @@ module.exports = {
         passport.authenticate('local', { 
           successRedirect: '/recipes/home',
           failureRedirect: '/user/login',
-          failureFlash: true }) (req,res,next)
+          failureFlash: true}) (req,res,next)
     },
  
     //log in to user dashboard
-    dashboard: (req, res) => {
-        res.render('dashboard', {name: req.user.user_id} )
+    dashboard: async (req, res) => {
+        
+        if(req.params.user_id === req.user.user_id) {
+            
+            //Getting all the recipes of the specific user
+            let userRecipes = []
+            userRecipes = await RecipeModel.find({user_id: req.user.user_id})
+
+            res.render('dashboard', {name: req.user.user_id, userRecipes: userRecipes})
+
+        } else {
+            req.flash('error_message', "Invalid credentials")
+            res.redirect('user/login')
+        }
+        
     }
 
 }

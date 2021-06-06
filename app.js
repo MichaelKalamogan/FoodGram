@@ -8,7 +8,7 @@ const session = require('express-session')
 const recipeController =  require ('./controllers/recipe_controller')
 const userController =  require('./controllers/user_controller')
 const methodOverride = require('method-override');
-const flash  = require('express-flash');
+const flash = require('connect-flash');
 const passport = require('passport')
 
 const app = express();
@@ -43,9 +43,19 @@ app.use(passport.session());
 
 //Used to show the appropriate Login/Logout links
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.isAuthenticated ();
+  if(req.isAuthenticated) {
+    res.locals.user = req.user
+  }
   next();
 })
+
+//To flash the appropriate success or error messages
+app.use((req, res, next) => {
+  res.locals.success_message = req.flash('success_message');
+  res.locals.error_message = req.flash('error_message');
+  res.locals.suggestion = req.flash('suggestion');
+  next();
+});
 
 
 // =======================================
@@ -59,7 +69,7 @@ app.get('/recipes/home', recipeController.index)
 app.get('/recipes/new',authenticatedOnly, recipeController.new)
 
 // show
-app.get('/recipes/:user_id/:id',  recipeController.show)
+app.get('/recipes/:user_id/:id', recipeController.show)
 
 // create
 app.post('/recipes', authenticatedOnly, recipeController.create)
@@ -77,13 +87,15 @@ app.get('/user/register', alreadyAuthenticated, userController.new)
 app.post('/user/register', alreadyAuthenticated, userController.create)
 
 //User Dashboard
-app.get('/user/dashboard', authenticatedOnly, userController.dashboard)
+app.get('/user/:user_id/dashboard', authenticatedOnly, userController.dashboard)
 
 //Logout
 app.delete('/user/logout', async (req, res) => {
   req.logOut()
+  req.flash('success_message', 'Successfully Logged Out.') //this is not coming out 
+  res.redirect('/recipes/home')
   req.session.destroy()
-  res.send('logged out')
+
 })
 
 //Error Handler
@@ -91,35 +103,6 @@ app.use(function (err, req, res, next) {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })
-
-// // edit
-// app.get('/recipes/:slug/edit', recipeController.editForm)
-
-// // update
-// app.patch('/recipes/:slug', recipeController.update)
-
-// // delete
-// app.delete('/recipes/:slug', recipeController.delete)
-
-// product rating routes
-
-// app.get('/recipes/:slug/ratings/new', productRatingController.newForm)
-
-// app.post('/recipes/:slug/ratings', productRatingController.create)
-
-// users
-
-// app.get('/users/register', guestOnlyMiddleware, userController.registerForm)
-
-// app.post('/users/register', guestOnlyMiddleware,  userController.registerUser)
-
-// app.get('/users/login', guestOnlyMiddleware, userController.loginForm)
-
-// app.post('/users/login', guestOnlyMiddleware, userController.loginUser)
-
-// app.get('/users/dashboard', authenticatedOnlyMiddleware, userController.dashboard)
-
-// app.post('/users/logout', authenticatedOnlyMiddleware, userController.logout)
 
 // =======================================
 //              LISTENER

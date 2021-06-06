@@ -7,19 +7,19 @@
     <body>
 
         <%- include('./partials/nav') %>
-        <%- include('./partials/alerts')%>
+        
+         <object data="/Images/FoodGram (1).svg" width="max-width" id="banner"> </object>
+         <%- include('./partials/alerts')%>
         <div class="index-container">
+            
             
             <% for(let i=0; i < recipes.length; i++) { %>
 
-            <div class="index-item">
-
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" alt="Chai Oatmeal" />
-                
-                <article>
-                    <h2><%=recipes[i].name%></h2>
-
-                    <ul class="snapshot">
+                <div class="index-card" style="width: 24rem;">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title"><%=recipes[i].name%></h5>
+                      <ul class="snapshot">
                         <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipes[i].serves%> </span></li>
                         <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipes[i].time%></span></li>
                         <% if(recipes[i].difficulty === 'Easy') { %>
@@ -43,21 +43,12 @@
                         
                         <% } %>
                         
-                    </ul>
-                        <% let ingredients = [] %>
-                        <%for (let j = 0;  j < recipes[i].ingredient.length; j++) { %>                            
-                            <% ingredients.push(recipes[i].ingredient[j].item) %>
-                        <% } %>    
-                    
+                    </ul>  
+                      <p class="card-text"><%= recipes[i].summary %></p>
+                      <a href="/recipes/<%= recipes[i].user_id%>/<%= recipes[i]._id%>" class="btn btn-primary">Show Full Recipe</a>
+                    </div>
+                  </div>
 
-                    <p><%= recipes[i].summary %></p>
-
-                    <p><span class="bold">Ingredients:&nbsp;</span><%= ingredients.join(', ')%></p>
-                    
-                </article>
-                <a href="/recipes/<%= recipes[i].user_id%>/<%= recipes[i]._id%>" id="index-show">Show Me More!</a>
-               
-            </div>
             <% } %>
                 
 
