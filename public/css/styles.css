@@ -4,7 +4,7 @@ body {
 }
 
 .after-navbar {
-    margin-top: 6em;
+    margin-top: 8em;
 }
 
 .index-container {
@@ -69,4 +69,8 @@ body {
 
 #main-name {
     padding-top: 10px;
+}
+
+div.edit-recipe{
+    align-items: flex-end;
 }

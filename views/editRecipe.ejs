@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+
+    <%- include('./partials/head') %>
+
+    <body>
+    <%- include('./partials/nav') %>
+
+    <div class="after-navbar">
+        <form>
+
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row edit-recipe">
+                            <div class="col-sm-3">
+                                <h6>Name of Dish</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" name="name" value="<%=recipe.name%>">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Cuisine Type</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select  class="form-select" name="cuisine" value="malay">
+                                    
+                                    <option value="chinese">Chinese</option>
+                                    <option value="malay">Malay</option>
+                                    <option value="indian">Indian</option>
+                                    <option value="french">French</option>
+                                    <option value="french">Italian</option>
+                                    <option value="western">Asian</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Personal Website</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <% if (user.website === "") { %>
+                                        <%= user.website %>
+                                    <% } else { %>
+                                        Please enter your personal website details (if any)                              
+                                <%}%>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Facebook</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <% if (user.facebook === "") { %>
+                                    <%= user.facebook %>
+                                <% } else { %>
+                                    Please enter your Facebook details (if any)                              
+                                <%}%>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Instagram</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <% if (user.instagram === "") { %>
+                                    <%= user.instagram %>
+                                <% } else { %>
+                                    Please enter your Instagram details (if any)                              
+                                <%}%>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Pinterest</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <% if (user.pinterest === "") { %>
+                                    <%= user.pinterest %>
+                                <% } else { %>
+                                    Please enter your Pinterest details (if any)                              
+                                <%}%>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-info " target="__blank" href="/user/<%=user.user_id%>/dashboard/edit">Save Changes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+    
+
+        </form>
+        
+    </div>
+   
+
+    </body>
+
+</html>

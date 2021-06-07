@@ -14,7 +14,7 @@ const passport = require('passport')
 const app = express();
 const port = 3000;
 const mongoURI = 'mongodb://localhost:27017/FoodGram'
-const { authenticatedOnly, alreadyAuthenticated} = require('./middlewares/auth-middleware');
+const { authenticatedOnly, alreadyAuthenticated, verifyUser} = require('./middlewares/auth-middleware');
 
 require('./config/passport-config')(passport)
 
@@ -68,6 +68,9 @@ app.get('/recipes/home', recipeController.index)
 // new
 app.get('/recipes/new',authenticatedOnly, recipeController.new)
 
+//Edit recipe
+app.get('/user/:user_id/:id/edit',authenticatedOnly, verifyUser, userController.editRecipe)
+
 // show
 app.get('/recipes/:user_id/:id', recipeController.show)
 
@@ -88,6 +91,8 @@ app.post('/user/register', alreadyAuthenticated, userController.create)
 
 //User Dashboard
 app.get('/user/:user_id/dashboard', authenticatedOnly, userController.dashboard)
+
+
 
 //Logout
 app.delete('/user/logout', async (req, res) => {

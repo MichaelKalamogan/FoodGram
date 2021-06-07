@@ -16,6 +16,18 @@ module.exports = {
           return res.redirect('/user/dashboard')
         }
         next()
-    }    
+    },
+    
+    verifyUser: (req,res,next) => {
+        if(req.params.user_id === req.user.user_id) {
+            
+            return next();
+
+        } else {
+            req.flash('error_message', "Invalid credentials")
+            res.redirect('user/login')
+        }
+
+    }
 
 }

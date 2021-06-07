@@ -3,6 +3,7 @@ const { UserModel } = require('../models/user')
 const { RecipeModel } = require ('../models/recipe')
 
 const passport = require('passport')
+const recipe = require('../models/recipe')
 
 module.exports = {
 
@@ -124,6 +125,21 @@ module.exports = {
             req.flash('error_message', "Invalid credentials")
             res.redirect('user/login')
         }
+        
+    },
+
+    //Edit Recipes
+    editRecipe: async (req, res, next) => {
+    
+    RecipeModel.findById(req.params.id)
+        .then(recipe => {
+            res.render('editRecipe', {recipe: recipe})
+        })
+    
+
+
+        
+
         
     }
 
