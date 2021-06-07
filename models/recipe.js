@@ -4,7 +4,6 @@ const recipeSchema = new mongoose.Schema ({
     name: { type: String, required: true },
     cuisine: { type: String, required: true },
     user_id: {type: String, required: true},
-    credit: { type: String, required: true},
     serves: { type: String, required: true },
     difficulty: { type: String, required: true },
     time: { type: String, required: true },
@@ -16,8 +15,8 @@ const recipeSchema = new mongoose.Schema ({
         rating: { type: Number },
         comment:{ type: String }
     }],
-    created_at: { type: Date },
-    updated_at: { type: Date },
+    created_at: { type: Date, default: Date.now},
+    updated_at: { type: Date, default: Date.now}
 
 }) //will need to add in the images portion
 

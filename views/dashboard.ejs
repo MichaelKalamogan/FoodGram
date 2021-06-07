@@ -52,7 +52,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
+                                    <h6 class="mb-0">E-mail Address</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <%=user.email%>
@@ -113,7 +113,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a class="btn btn-info " target="__blank" href="/user/<%=user.user_id%>/dashboard/edit">Edit</a>
+                                    <a class="btn btn-info " href="/user/<%=user.user_id%>/dashboard/edit">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,13 @@
                           <p class="card-text"><%= userRecipes[i].name %></p>
                         </div>
                         <div class="row">
-                            <a class="btn btn-info " href="/user/<%= user.user_id%>/<%= userRecipes[i]._id%>/edit">Edit</a>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a  href="/user/<%= user.user_id%>/<%= userRecipes[i]._id%>/edit"><button class="btn btn-primary me-md-2" type="button">Edit</button></a>
+                                <form method="post" action="/user/<%=user.user_id%>/<%= userRecipes[i]._id%>/delete?_method=DELETE"> 
+                                    <a onclick="return confirm('Are you sure you want to delete this item?');"><button class="btn btn-primary" type="submit">Delete</button></a>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                     <% } %>

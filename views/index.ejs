@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <%- include('./partials/head') %>
-    </head>
+    
+<%- include('./partials/head') %>
+    
 
     <body>
 
@@ -45,7 +45,7 @@
                         
                     </ul>  
                       <p class="card-text"><%= recipes[i].summary %></p>
-                      <a href="/recipes/<%= recipes[i].user_id%>/<%= recipes[i]._id%>" class="btn btn-primary">Show Full Recipe</a>
+                      <a href="/recipes/<%= recipes[i]._id%>" class="btn btn-primary">Show Full Recipe</a>
                     </div>
                   </div>
 

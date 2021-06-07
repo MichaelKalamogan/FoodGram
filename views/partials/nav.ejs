@@ -1,4 +1,4 @@
-<nav role="navigation" class="primary-navigation">
+<nav role="navigation" class="primary-navigation" style="z-index: 999;">
     <span>
         <h2>FoodGram<span id="copyright" class="iconify" data-icon="bx:bx-copyright" data-inline="true"></span></h2>
     </span>
@@ -14,8 +14,8 @@
             <li><a href="#">Others</a></li>
         </ul>
         </li>
-        <% if (user) { %>
         <li class="main-link"><a href="/recipes/new">Upload Your Own Recipe!</a></li>
+        <% if (user) { %>
         <li class="main-link"><a href="/user/<%=user.user_id%>/dashboard">Your Dashboard</a></li>
         <% } %>
         <li class="main-link"><a href="/contact-us">Contact Us</a></li>

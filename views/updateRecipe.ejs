@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+
+    <%- include('./partials/head') %>
+ 
+    <body>
+    <%- include('./partials/nav') %>
+
+    <div class="after-navbar">
+        <form method="POST" action="/user/<%=user.user_id%>/<%=recipe._id%>/edit">
+
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row edit-form">
+                            <div class="col-sm-3">
+                                <h6>Name of Dish</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" name="name" value="<%=recipe.name%>">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row edit-form">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Cuisine Type</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select  class="form-select" name="cuisine">
+                                    <option value="chinese" 
+                                        <%if(recipe.cuisine === 'chinese') {%> 
+                                            selected 
+                                        <% } %>>Chinese</option>
+                                    <option value="malay"
+                                        <%if(recipe.cuisine === 'malay') {%> 
+                                            selected 
+                                        <% } %>>Malay</option>
+                                    <option value="indian" 
+                                        <%if(recipe.cuisine === 'indian') {%> 
+                                            selected 
+                                        <% } %>>Indian</option>
+                                    <option value="french"
+                                        <%if(recipe.cuisine === 'french') {%> 
+                                            selected 
+                                        <% } %>>French</option>
+                                    <option value="Italian"
+                                        <%if(recipe.cuisine === 'italian') {%> 
+                                            selected 
+                                        <% } %>>Italian</option>
+                                    <option value="asian"
+                                        <%if(recipe.cuisine === 'asian') {%> 
+                                            selected 
+                                        <% } %>>Asian</option>
+                                    <option value="others"
+                                        <%if(recipe.cuisine === 'others') {%> 
+                                            selected 
+                                        <% } %>>Others</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row edit-form">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Serves</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select class="form-select" name="serves">
+                                    <option value="1"
+                                        <%if(recipe.serves === '1') {%> 
+                                            selected 
+                                        <% } %>>1</option>
+                                    <option value="2"
+                                        <%if(recipe.serves === '2') {%> 
+                                            selected 
+                                        <% } %>>2</option>
+                                    <option value="3"
+                                        <%if(recipe.serves === '3') {%> 
+                                            selected 
+                                        <% } %>>3</option>
+                                    <option value="4"
+                                        <%if(recipe.serves === '4') {%> 
+                                            selected 
+                                        <% } %>>4</option>
+                                    <option value=">4"
+                                        <%if(recipe.serves === '>4') {%> 
+                                            selected 
+                                        <% } %>>5 or more</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row edit-form">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Difficulty</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select class="form-select" name="difficulty">
+                                    <option value="Easy"
+                                        <%if(recipe.serves === 'easy') {%> 
+                                            selected 
+                                        <% } %>>Easy</option>
+                                    <option value="Medium"
+                                        <%if(recipe.serves === 'medium') {%> 
+                                            selected 
+                                        <% } %>>Medium</option>
+                                    <option value="Hard"
+                                        <%if(recipe.serves === 'hard') {%> 
+                                            selected 
+                                        <% } %>>Hard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Summary of Dish</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <textarea class="form-control" rows="3" name="summary"><%=recipe.summary%></textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Ingredients</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <div id="updateIngredient">
+                                    <% for(let i = 0; i < recipe.ingredient.length; i++) { %>
+                                        <input type="text" class="form-control mb-2" name="ingredient[]" value="<%=recipe.ingredient[i].item%>">
+                                    <% } %>
+                                </div>                               
+                                <button type="button" class="btn btn-outline-primary" id="ingAdd">Add</button>
+                                <button type="button" class="btn btn-outline-danger" id="ingDel">Delete</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Cooking Instructions</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <div id="updateInstruction">
+                                    <% for(let i = 0; i < recipe.instruction.length; i++) { %>
+                                        <input type="text" class="form-control mb-2" name="instruction[]" value="<%=recipe.instruction[i].toDo%>">
+                                    <% } %>
+                                </div>
+                                <button type="button" class="btn btn-outline-primary" id="instAdd">Add</button>
+                                <button type="button" class="btn btn-outline-danger" id="instDel">Delete</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-info" >Save Changes</button>
+                                <a href='/user/<%=user.user_id%>/dashboard'><button type="button" class="btn btn-info" style="background-color: lightgreen;">Go Back Without Saving</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+    
+
+        </form>
+        
+    </div>
+
+       <!-- Script file to work with the add additonal input field buttons -->
+    <script> 
+        <%- include("../scripts/update-recipe.js") %> 
+    </script> 
+
+    </body>
+
+</html>

@@ -25,7 +25,7 @@ module.exports = {
 
         let recipeReq = {}
         
-        RecipeModel.findOne ({user_id:  req.params.user_id, _id: req.params.id})
+        RecipeModel.findOne ({_id: req.params.id})
             .then(item => {
                 // if item is not found, redirect to homepage
                 if (!item) {
@@ -60,7 +60,6 @@ module.exports = {
                 errors: errors,
                 name: name,
                 cuisine: cuisine,
-                credit: credit,
                 serves: serves,
                 difficulty: difficulty,
                 time: time,
@@ -98,9 +97,16 @@ module.exports = {
                 instruction: newInstructions
             })
                 .then(createResp =>{        
-                    res.redirect(`/user/dashboard`)
+                    res.redirect(`/user/${req.user.user_id}/dashboard`)
                 })
         }
     },
+
+    delete: (req, res) => {
+        RecipeModel.deleteOne( {_id: req.params.id})
+            .then(deleteResp => {
+            res.redirect(`/user/${req.user.user_id}/dashboard`)
+            })
+    }
 
 }

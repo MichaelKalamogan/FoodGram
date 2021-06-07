@@ -2,10 +2,10 @@
 
 window.onload = () => {
     
-    let ingredientList = document.getElementById('ingredient-list')
-    let preparationList = document.getElementById('preparation')
+    let ingredientList = document.getElementById('ingredientList')
+    let instructionList = document.getElementById('instructionList')
     
-    //buttons in new.ejs
+    //buttons in newform.ejs
     let addIngredientButton = document.getElementById('add-ingredient')
     let delIngredientButton = document.getElementById('del-ingredient')
     let addCookingStepsButton = document.getElementById('add-steps')
@@ -17,38 +17,14 @@ window.onload = () => {
 
         event.preventDefault();
         
-        //create the new div for ingredient.item
-        let newIngredientItemDiv = document.createElement('div')
-        newIngredientItemDiv.setAttribute('class', 'col-md-6')
+        //create the new input for ingredient.item
+        let newIngredientItemInput = document.createElement('input')
+        newIngredientItemInput.setAttribute('type', 'text')
+        newIngredientItemInput.setAttribute('class','form-control mb-2')
+        newIngredientItemInput.setAttribute('name','ingredient[]')
         
-        //create the new input field for ingredient.item
-        let newIngredientItem = document.createElement('input')
-        newIngredientItem.setAttribute('type', 'text')
-        newIngredientItem.setAttribute('class', 'col-md-6 form-control ingredient-item')
-        newIngredientItem.setAttribute('name','ingredient[]')
-        newIngredientItem.setAttribute('placeholder', 'Next Ingredient')
         //Append item input field to div
-        newIngredientItemDiv.appendChild(newIngredientItem);
-
-        //create the new div for ingredient.qty
-        // let newIngredientQtyDiv = document.createElement('div')
-        // newIngredientQtyDiv.setAttribute('class', 'col-md-2')
-
-        //create the new input field for ingredient.item
-        // let newIngredientQty = document.createElement('input')
-        // newIngredientQty.setAttribute('type', 'text')
-        // newIngredientQty.setAttribute('class', 'col-md-2 form-control ingredient-qty')
-        // newIngredientQty.setAttribute('name','ingredientQuantity[]')
-        // newIngredientQty.setAttribute('placeholder','Quantity')
-
-        //Append quantity input field to div
-        // newIngredientQtyDiv.appendChild(newIngredientQty)
-        
-        //append new Ingredient item div to section
-        ingredientList.appendChild(newIngredientItemDiv)
-
-        //append new Ingredient quantity div to section
-        // ingredientList.appendChild(newIngredientQtyDiv)
+        ingredientList.appendChild(newIngredientItemInput);
 
         //add to the ingredient row variable
         ingredientRow++;
@@ -61,36 +37,17 @@ window.onload = () => {
         
         event.preventDefault();
 
+        //create new step div (number)
+        let newInstructionInput = document.createElement('input')
+        newInstructionInput.setAttribute('type', 'text')
+        newInstructionInput.setAttribute('class','form-control mb-2')
+        newInstructionInput.setAttribute('name','instruction[]')
+
+        //append newinput field
+        instructionList.appendChild(newInstructionInput)
+
         //to cooking step variable to keep track of step no.    
         cookingStep++;
-
-        //create new step div (number)
-        let newStepDiv = document.createElement('div')
-        let newh4 = document.createElement('h4')
-        newh4.setAttribute('class', 'step')      
-        newh4.innerText = cookingStep + '.'
-
-        //append h4 to steps div
-        newStepDiv.appendChild(newh4)
-
-        //create new steps input div
-        let newStepInputDiv = document.createElement('div')
-        newStepInputDiv.setAttribute('class', 'col-md-7')
-
-        //create steps input
-        let newStepInput = document.createElement('input')
-        newStepInput.setAttribute('type', 'text')
-        newStepInput.setAttribute('class', 'col-md-7 form-control')
-        newStepInput.setAttribute('name', 'instruction[]')
-        newStepInput.setAttribute('placeholder', 'Next Step to Take')
-
-        //append steps input to dteps div
-        newStepInputDiv.appendChild(newStepInput)
-
-        //append to html
-        preparationList.appendChild(newStepDiv)
-        preparationList.appendChild(newStepInputDiv)
-
     }
 
 
@@ -98,12 +55,16 @@ window.onload = () => {
 
         event.preventDefault();
 
-        //remove ingredient and quantity
-        ingredientList.removeChild(ingredientList.lastElementChild)
-        ingredientList.removeChild(ingredientList.lastElementChild)
+        if (ingredientRow > 1) {
 
-        if (ingredientRow > 0) {
             ingredientRow--;
+            //remove ingredient and quantity
+            ingredientList.removeChild(ingredientList.lastElementChild)
+
+        } else { 
+
+            alert("Need at least one ingredient")
+            return
         }
     }
 
@@ -111,13 +72,14 @@ window.onload = () => {
     delCookingStepsButton.onclick = (event) => {
 
         if (cookingStep > 1) {
+
             cookingStep--;
 
-        //remove input and step number
-        preparationList.removeChild(preparationList.lastElementChild)
-        preparationList.removeChild(preparationList.lastElementChild)
+            //remove input 
+            instructionList.removeChild(instructionList.lastElementChild)
 
         } else {
+
             alert("nothing to delete")
             return
         }

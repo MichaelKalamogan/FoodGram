@@ -68,11 +68,8 @@ app.get('/recipes/home', recipeController.index)
 // new
 app.get('/recipes/new',authenticatedOnly, recipeController.new)
 
-//Edit recipe
-app.get('/user/:user_id/:id/edit',authenticatedOnly, verifyUser, userController.editRecipe)
-
 // show
-app.get('/recipes/:user_id/:id', recipeController.show)
+app.get('/recipes/:id', recipeController.show)
 
 // create
 app.post('/recipes', authenticatedOnly, recipeController.create)
@@ -90,8 +87,18 @@ app.get('/user/register', alreadyAuthenticated, userController.new)
 app.post('/user/register', alreadyAuthenticated, userController.create)
 
 //User Dashboard
-app.get('/user/:user_id/dashboard', authenticatedOnly, userController.dashboard)
+app.get('/user/:user_id/dashboard', authenticatedOnly, verifyUser, userController.dashboard)
 
+//Edit the user Profile
+app.get('/user/:user_id/dashboard/edit', authenticatedOnly, verifyUser, userController.editDashboard)
+
+//Page to edit previous recipe
+app.get('/user/:user_id/:id/edit', authenticatedOnly, verifyUser, userController.updateRecipeForm)
+
+//Update the recipe
+app.post('/user/:user_id/:id/edit', authenticatedOnly, verifyUser, userController.updateRecipe)
+
+app.delete('/user/:user_id/:id/delete', authenticatedOnly, verifyUser, recipeController.delete)
 
 
 //Logout

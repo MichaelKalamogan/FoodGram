@@ -112,35 +112,68 @@ module.exports = {
  
     //log in to user dashboard
     dashboard: async (req, res) => {
-        
-        if(req.params.user_id === req.user.user_id) {
-            
-            //Getting all the recipes of the specific user
-            let userRecipes = []
-            userRecipes = await RecipeModel.find({user_id: req.user.user_id})
+                           
+        //Getting all the recipes of the specific user
+        let userRecipes = []
+        userRecipes = await RecipeModel.find({user_id: req.user.user_id})
 
-            res.render('dashboard', {name: req.user.user_id, userRecipes: userRecipes})
+        res.render('dashboard', {name: req.user.user_id, userRecipes: userRecipes})
 
-        } else {
-            req.flash('error_message', "Invalid credentials")
-            res.redirect('user/login')
-        }
-        
+    },
+
+    editDashboard: (req,res) => {
+        res.render('editDashboard', {user: req.user})
+
     },
 
     //Edit Recipes
-    editRecipe: async (req, res, next) => {
+    updateRecipeForm: async (req, res, next) => {
     
-    RecipeModel.findById(req.params.id)
-        .then(recipe => {
-            res.render('editRecipe', {recipe: recipe})
-        })
+    let userRecipe = []
     
+    userRecipe= await RecipeModel.findById(req.params.id)
 
+        // .then(recipe => {
+            res.render('updateRecipe', {recipe: userRecipe})
+        // })
+    },
 
+    updateRecipe: async(req,res,next) => {
+
+        let updatedIngredient = []
         
-
+        for (let i = 0; i < req.body.ingredient.length; i++) {
+            updatedIngredient.push({"item":req.body.ingredient[i]})
+        }   
+    
+        let updatedInstructions = []
+    
+        for(let i =0; i< req.body.instruction.length; i++) {
+            updatedInstructions.push({"toDo": req.body.instruction[i]})
+        }         
         
+        RecipeModel.updateOne(
+            { _id: req.params.id},
+            {
+                $set: {
+                    name: req.body.name,
+                    cuisine: req.body.cuisine,
+                    serves: req.body.serves,
+                    difficulty: req.body.difficulty,
+                    time: req.body.time,
+                    summary: req.body.summary,
+                    ingredient: updatedIngredient,            
+                    instruction: updatedInstructions,
+                    updated_at: Date.now()
+                }
+            }
+        )
+
+            .then(updatedRecipe => {
+            
+                res.redirect('/recipes/' + req.params.id)
+                return
+            })
     }
 
 }

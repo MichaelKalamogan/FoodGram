@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema ({
     website:{type: String},
     facebook:{type: String},
     instagram:{type: String},
+    pinterest:{type: String},
     created_date: { type: Date, default: Date.now},
     updated_date: { type: Date, default: Date.now}
 

@@ -2,8 +2,7 @@
 <html>
     <head>
         <%- include('./partials/head') %>
-        <!-- CSS only -->
-        <link rel="stylesheet" href="/css/newform-styles.css">  
+
     </head>
     
     
@@ -13,100 +12,138 @@
         <div class="after-navbar newrecipe">
 
             <%- include('./partials/alerts') %>
-            <form class="row g-3" method="POST" action="/recipes">
 
+            <div class="after-navbar">
                 <h1>Upload your own recipe!</h1>
-    
-                <div class="col-md-5">
-                    <input type="text" class="form-control" name="name" placeholder=" Name of Dish (Required) ">
-                </div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="credit" placeholder = "Credits">
-                </div> 
-                <section id="new-dropdowns">
-                    <div class="col-md-2">
-                        <select  class="form-select" name="cuisine">
-                            <option selected>Cuisine Type</option>
-                                <option value="chinese">Chinese</option>
-                                <option value="malay">Malay</option>
-                                <option value="indian">Indian</option>
-                                <option value="french">French</option>
-                                <option value="french">Italian</option>
-                                <option value="western">Asian</option>
-                                <option value="others">Others</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <select class="form-select" name="serves">
-                            <option selected>Serves</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value=">4">5 or more</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <select class="form-select" name="difficulty">
-                            <option selected>Difficulty</option>
-                              <option value="Easy">Beginner</option>
-                              <option value="Medium">Medium</option>
-                              <option value="Hard">Hard</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <select class="form-select" name="time">
-                            <option selected>Time Taken</option>
-                              <option value="30 mins">30 Mins</option>
-                              <option value="1 hr">1 Hour</option>
-                              <option value="1 hr 30 mins">1 Hour 30 mins</option>
-                              <option value="2 hrs">2 Hours</option>
-                              <option value="2 hrs 30 mins">2 Hour 30 mins</option>
-                              <option value="3 hrs">3 Hours</option>
-                              <option value="> 3hrs">More than 3 hours</option>
-                        </select>
-                    </div>
-                </section>
-    
-                <div class="col-md-8">
-                    <textarea class="form-control" rows="3" name="summary" placeholder="Brief Summary of Dish"></textarea>
-                </div>
-    
-                <section class="new-sect">
-                    <h3> Ingredient List</h3>
-                    
-                    <section id="ingredient-list">                    
-                        <div class="col-md-8" >
-                            <input type="text" class="col-md-6 form-control ingredient-item" name="ingredient[]" placeholder="Ingredient and Amount Required(E.g: Minced Chicken / Salt, 500mg ">
-                        </div>
-                    </section>
-                    <section class="add-delete-buttons">
-                        <button type="button" id="add-ingredient">Add</button>
-                        <button type="button" id="del-ingredient">Delete</button>
-                    </section>
-    
-                </section>
-    
-                <section class="new-sect">
-                    <h3> How To Cook</h3>
-                    <section id="preparation">
-                        <div class="col-md-1">
-                            <h4 class="step">1. </h4>
-                        </div>
-                        <div class="col-md-7" >                        
-                            <input type="text" class="col-md-7 form-control" name="instruction[]" placeholder="Step to Take">
-                        </div>
-                    </section>    
-                    <section class="add-delete-buttons">
-                        <button type="button" id="add-steps">Add</button>
-                        <button type="button" id="delete-steps">Delete</button>
-                    </section>             
-                </section>
-               
-                <button type="submit" class="button" id>Submit</button>
-            </form>
 
-
+                <form method="POST" method="POST" action="/recipes">
+        
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row edit-form">
+                                    <div class="col-sm-3">
+                                        <h6>Name of Dish</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" name="name" placeholder="Required">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row edit-form">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Cuisine Type</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <select  class="form-select" name="cuisine"> 
+                                            <option selected>Cuisine Type</option>
+                                                <option value="chinese">Chinese</option>
+                                                <option value="malay">Malay</option>
+                                                <option value="indian">Indian</option>
+                                                <option value="french">French</option>
+                                                <option value="french">Italian</option>
+                                                <option value="western">Asian</option>
+                                                <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row edit-form">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Serves</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <select class="form-select" name="serves">
+                                            <option selected>Serves</option>
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                              <option value=">4">5 or more</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row edit-form">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Serves</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <select class="form-select" name="time">
+                                            <option selected>Time Taken</option>
+                                              <option value="30 mins">30 Mins</option>
+                                              <option value="1 hr">1 Hour</option>
+                                              <option value="1 hr 30 mins">1 Hour 30 mins</option>
+                                              <option value="2 hrs">2 Hours</option>
+                                              <option value="2 hrs 30 mins">2 Hour 30 mins</option>
+                                              <option value="3 hrs">3 Hours</option>
+                                              <option value=">3hrs">More than 3 hours</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>  
+                                <div class="row edit-form">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Difficulty</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <select class="form-select" name="difficulty">
+                                            <option selected>Difficulty</option>
+                                                <option value="Easy">Easy</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="Hard">Hard</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Summary of Dish</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <textarea class="form-control" rows="3" name="summary" placeholder="Brief Summary of Dish"></textarea>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Ingredient List</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <div id="ingredientList">
+                                            <input type="text" class="form-control mb-2" name="ingredient[]" placeholder="Ingredient, Amount Required (E.g: Salt, 500mg)">
+                                        </div>                               
+                                        <button type="button" class="btn btn-outline-primary" id="add-ingredient">Add</button>
+                                        <button type="button" class="btn btn-outline-danger" id="del-ingredient">Delete</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Cooking Instructions</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <div id="instructionList">
+                                            <input type="text" class="form-control mb-2" name="instruction[]" placeholder="Step to Take">           
+                                        </div>
+                                        <button type="button" class="btn btn-outline-primary" id="add-steps">Add</button>
+                                        <button type="button" class="btn btn-outline-danger" id="delete-steps">Delete</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-info" >Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+            
+        
+                </form>
+                
+            </div>
         </div>
 
     
