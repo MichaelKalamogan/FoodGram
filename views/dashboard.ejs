@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <h6 class="personal-info">This is how your profile page will appear to others.</h6>
-                                <img src="/Images/chef.png" alt="Admin" class="square" width="150">
+                                <img src="<%=user.image%>" alt="Profile Picture to be uploaded" class="square" width="150">
                                 <div class="mt-3">
                                     <h4><%=user.user_id%></h4>
                                     <button class="btn btn-primary">Follow</button>
@@ -23,10 +23,10 @@
                             </div>
                             <div class="social-icons">
                                 <ul>
-                                    <li><a href="https://google.com"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
-                                    <li><a href="https://facebook.com"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
-                                    <li><a href="https://instagram.com"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
-                                    <li><a href="https://pinterest.com"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
+                                    <li><a href="<%user.website%>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                    <li><a href="<%user.facebook%>"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
+                                    <li><a href="<%user.instagram%>"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
+                                    <li><a href="<%user.pinterest%>"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
                                 </ul>
                             </div> 
                         </div>
@@ -64,7 +64,7 @@
                                     <h6 class="mb-0">Personal Website</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <% if (user.website === "") { %>
+                                    <% if (user.website !== "") { %>
                                             <%= user.website %>
                                         <% } else { %>
                                             Please enter your personal website details (if any)                              
@@ -77,7 +77,7 @@
                                     <h6 class="mb-0">Facebook</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <% if (user.facebook === "") { %>
+                                    <% if (user.facebook !== "") { %>
                                         <%= user.facebook %>
                                     <% } else { %>
                                         Please enter your Facebook details (if any)                              
@@ -90,7 +90,7 @@
                                     <h6 class="mb-0">Instagram</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <% if (user.instagram === "") { %>
+                                    <% if (user.instagram !== "") { %>
                                         <%= user.instagram %>
                                     <% } else { %>
                                         Please enter your Instagram details (if any)                              
@@ -103,7 +103,7 @@
                                     <h6 class="mb-0">Pinterest</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <% if (user.pinterest === "") { %>
+                                    <% if (user.pinterest !== "") { %>
                                         <%= user.pinterest %>
                                     <% } else { %>
                                         Please enter your Pinterest details (if any)                              
@@ -131,7 +131,7 @@
                 <div class="row">
                     <%for(let i = 0; i < userRecipes.length; i++) { %>
                     <div class="card recipe-card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="Picture of the Dish">
+                        <img src="<%= userRecipes[i].image%>" class="card-img-top" alt="Picture of the Dish">
                         <div class="card-body">
                           <p class="card-text"><%= userRecipes[i].name %></p>
                         </div>

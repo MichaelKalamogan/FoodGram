@@ -9,6 +9,8 @@ const UserSchema = new mongoose.Schema ({
     facebook:{type: String},
     instagram:{type: String},
     pinterest:{type: String},
+    image: {type: String},
+    cloudinary_id: {type: String},
     created_date: { type: Date, default: Date.now},
     updated_date: { type: Date, default: Date.now}
 

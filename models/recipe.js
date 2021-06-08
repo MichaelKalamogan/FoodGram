@@ -7,10 +7,11 @@ const recipeSchema = new mongoose.Schema ({
     serves: { type: String, required: true },
     difficulty: { type: String, required: true },
     time: { type: String, required: true },
-    summary: { type: String, required: true },
+    summary: { type: String},
     ingredient: [{item: {type: String}}],
     instruction: [{toDo : {type: String}}],
-
+    image: {type: String},
+    cloudinary_id: {type: String},
     reviews: [{
         rating: { type: Number },
         comment:{ type: String }

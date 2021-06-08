@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
     
-<%- include('./partials/head') %>
+    <%- include('./partials/head') %>
     
-
     <body>
 
         <%- include('./partials/nav') %>
@@ -11,45 +10,56 @@
          <object data="/Images/FoodGram (1).svg" width="max-width" id="banner"> </object>
          <%- include('./partials/alerts')%>
         <div class="index-container">
+
+            <div class="row">
+                <div class="btn-group me-2" role="group" aria-label="Second group">
+                    <button type="radio" class="btn btn-secondary">5</button>
+                    <button type="radio" class="btn btn-secondary">6</button>
+                    <button type="radio" class="btn btn-secondary">7</button>
+                </div>
+            </div>
             
+            <div class="row" id="whole-list">
+                <% for(let i=0; i < recipes.length; i++) { %>
+
+                    <div class="index-card" style="width: 24rem;">
+                        <img src="<%=recipes[i].image%>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title"><%=recipes[i].name%></h5>
+                          <ul class="snapshot">
+                            <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipes[i].serves%> </span></li>
+                            <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipes[i].time%></span></li>
+                            <% if(recipes[i].difficulty === 'Easy') { %>
+                            <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
+                            <% } else if(recipes[i].difficulty === 'Medium') { %>
+                                <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
+                            <% } else if(recipes[i].difficulty === 'Hard') { %>
+                                <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
+                            <% } %>
+                            
+                            <% if(recipes[i].reviews.length > 0) { %>
+                                <% let reviews = recipes[i].reviews %>
+                                <% let averageReviews = 0 %>
+                                <% reviews = reviews.reduce(function(a, b){ %>
+                                   <% return a + b; %>
+                                <% }, 0) %>
+                                <% averageReviews = sumReviews/reviews.length %>    
+    
+    
+                                <li class="snapshot"><span><%= averageReviews %></span></li>
+                            
+                            <% } %>
+                            
+                        </ul>  
+                          <p class="card-text"><%= recipes[i].summary %></p>
+                          <a href="/recipes/<%= recipes[i]._id%>" class="btn btn-primary">Show Full Recipe</a>
+                        </div>
+                      </div>
+    
+                <% } %>
+
+            </div>
             
-            <% for(let i=0; i < recipes.length; i++) { %>
-
-                <div class="index-card" style="width: 24rem;">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title"><%=recipes[i].name%></h5>
-                      <ul class="snapshot">
-                        <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipes[i].serves%> </span></li>
-                        <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipes[i].time%></span></li>
-                        <% if(recipes[i].difficulty === 'Easy') { %>
-                        <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
-                        <% } else if(recipes[i].difficulty === 'Medium') { %>
-                            <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
-                        <% } else if(recipes[i].difficulty === 'Hard') { %>
-                            <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
-                        <% } %>
-                        
-                        <% if(recipes[i].reviews.length > 0) { %>
-                            <% let reviews = recipes[i].reviews %>
-                            <% let averageReviews = 0 %>
-                            <% reviews = reviews.reduce(function(a, b){ %>
-                               <% return a + b; %>
-                            <% }, 0) %>
-                            <% averageReviews = sumReviews/reviews.length %>    
-
-
-                            <li class="snapshot"><span><%= averageReviews %></span></li>
-                        
-                        <% } %>
-                        
-                    </ul>  
-                      <p class="card-text"><%= recipes[i].summary %></p>
-                      <a href="/recipes/<%= recipes[i]._id%>" class="btn btn-primary">Show Full Recipe</a>
-                    </div>
-                  </div>
-
-            <% } %>
                 
 
         </div>

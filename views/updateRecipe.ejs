@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 
 <html>
 
@@ -8,7 +8,7 @@
     <%- include('./partials/nav') %>
 
     <div class="after-navbar">
-        <form method="POST" action="/user/<%=user.user_id%>/<%=recipe._id%>/edit">
+        <form method="POST" action="/recipe/<%=user.user_id%>/<%=recipe._id%>/edit">
 
             <div class="col-md-8">
                 <div class="card mb-3">
@@ -19,6 +19,15 @@
                             </div>
                             <div class="col-sm-9 text-secondary">
                                 <input type="text" class="form-control" name="name" value="<%=recipe.name%>">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row edit-form">
+                            <div class="col-sm-3">
+                                <h6>Picture of the Dish</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="file"  accept="image/gif, image/jpeg, image/png, image/jpg" name="newImage" id="file">
                             </div>
                         </div>
                         <hr>
@@ -92,6 +101,45 @@
                         <hr>
                         <div class="row edit-form">
                             <div class="col-sm-3">
+                                <h6 class="mb-0">Time to Cook</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select class="form-select" name="time">
+                                    <option selected>Time Taken</option>
+                                      <option value="30 mins"
+                                      <%if(recipe.time === '30 mins') {%>
+                                        selected
+                                      <%}%>>30 Mins</option>
+                                      <option value="1 hr"
+                                      <%if(recipe.time === '1 hr') {%>
+                                        selected
+                                      <%}%>>1 Hour</option>
+                                      <option value="1 hr 30 mins"
+                                      <%if(recipe.time === '1 hr 30 mins') {%>
+                                        selected
+                                      <%}%>>1 Hour 30 mins</option>
+                                      <option value="2 hrs"
+                                      <%if(recipe.time === '2 hrs') {%>
+                                        selected
+                                      <%}%>>2 Hours</option>
+                                      <option value="2 hrs 30 mins"
+                                      <%if(recipe.time === '2 hrs 30 mins') {%>
+                                        selected
+                                      <%}%>>2 Hour 30 mins</option>
+                                      <option value="3 hrs"
+                                      <%if(recipe.time === '3 hrs') {%>
+                                        selected
+                                      <%}%>>3 Hours</option>
+                                      <option value=">3hrs"
+                                        <%if(recipe.time === '>3hrs') {%>
+                                            selected
+                                         <%}%>>More than 3 hours</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>  
+                        <div class="row edit-form">
+                            <div class="col-sm-3">
                                 <h6 class="mb-0">Difficulty</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
@@ -154,7 +202,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-info" >Save Changes</button>
-                                <a href='/user/<%=user.user_id%>/dashboard'><button type="button" class="btn btn-info" style="background-color: lightgreen;">Go Back Without Saving</button></a>
+                                <a href='/recipe/<%=user.user_id%>/dashboard'><button type="button" class="btn btn-info" style="background-color: lightgreen;">Go Back Without Saving</button></a>
                             </div>
                         </div>
                     </div>

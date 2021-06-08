@@ -14,58 +14,75 @@
             </div>
             
 
-            <div id="show-header" class="container">  
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" alt="Chai Oatmeal" id="show-image"/>
-                 <aside id="show-aside">
-                     <h2>Reviews</h2>
-                     <h3>Remember to input the reviews and a scroll bar</h3>
-                 </aside>
-            
-            </div>
-            
-            <div>
-                <ul class="snapshot">
-                    <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipe.serves%> </span></li>
-                    <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipe.time%></span></li>
-                    <% if(recipe.difficulty === 'Easy') { %>
-                    <li class="snapshot" ><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
-                    <% } else if(recipe.difficulty === 'Medium') { %>
-                        <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
-                    <% } else if(recipe.difficulty === 'Hard') { %>
-                        <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
-                    <% } %>
-                    
-                    <% if(recipe.reviews.length > 0) { %>
-                        <% let reviews = recipe.reviews %>
-                        <% let averageReviews = 0 %>
-                        <% reviews = reviews.reduce(function(a, b){ %>
-                           <% return a + b; %>
-                        <% }, 0) %>
-                        <% averageReviews = sumReviews/reviews.length %>    
-    
-    
-                        <li class="snapshot"><span><%= averageReviews %></span></li>
-                    
-                    <% } %>
-                    
-                </ul>
-                <% if(recipe.reviews.length > 0) { %>
-                    <% let reviews = recipe.reviews %>
-                    <% let averageReviews = 0 %>
-                    <% reviews = reviews.reduce(function(a, b){ %>
-                       <% return a + b; %>
-                    <% }, 0) %>
-                    <% averageReviews = sumReviews/reviews.length %>    
-    
-    
-                    <li class="snapshot"><span><%= averageReviews %></span></li>
+            <div class="container">
                 
-                <% } %>
-    
-            </div>  
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" alt="Chai Oatmeal" id="show-image"/>
+                        
+                        <div class="row" style="margin-left: 0;">                        
+                            <ul class="snapshot">
+                                <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipe.serves%> </span></li>
+                                <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipe.time%></span></li>
+                                <% if(recipe.difficulty === 'Easy') { %>
+                                <li class="snapshot" ><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                                <% } else if(recipe.difficulty === 'Medium') { %>
+                                    <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                                <% } else if(recipe.difficulty === 'Hard') { %>
+                                    <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                                <% } %>
+                                
+                                <% if(recipe.reviews.length > 0) { %>
+                                    <% let reviews = recipe.reviews %>
+                                    <% let averageReviews = 0 %>
+                                    <% reviews = reviews.reduce(function(a, b){ %>
+                                    <% return a + b; %>
+                                    <% }, 0) %>
+                                    <% averageReviews = sumReviews/reviews.length %>                        
+                                    <li class="snapshot"><span><%= averageReviews %></span></li>
+                            
+                                <% } %>                            
+                            </ul>   
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="/Images/chef.png" alt="Admin" class="square" width="150">
+                                    <div class="mt-3">
+                                        <h4><%=userReq.user_id%></h4>
+                                        <button class="btn btn-primary">Follow</button>
+                                        <button class="btn btn-outline-primary">Message</button>
+                                    </div>
+                                </div>
+                                <div class="social-icons">
+                                    <ul>
+                                        <%if (userReq.website) { %>
+                                            <li><a href="<% userReq.website %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                        <% } %>
+                                        <%if (userReq.facebook) { %>
+                                            <li><a href="<% userReq.facebook %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                        <% } %>
+                                        <%if (userReq.instagram) { %>
+                                            <li><a href="<% userReq.instagram %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                        <% } %>
+                                        <%if (userReq.pinterest) { %>
+                                            <li><a href="<% userReq.pinterest %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                        <% } %>
+                                    </ul>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
+            </div>            
     
-            <section>
+            <div class="container mt-2">
                 <h2>Ingredients List</h2>
                 <table>
                     <%for(let i=0; i < recipe.ingredient.length; i++) { %>
@@ -76,9 +93,9 @@
                         </tr>
                     <% } %>
                 </table>
-            </section>
+            </div>
     
-            <section>
+            <div class="container mt-5">
                 <h2> How To Cook</h2>
                 <table>
                     <%for(let i=0; i < recipe.instruction.length; i++) { %>
@@ -89,13 +106,10 @@
                     <% } %>
                 </table>
     
-            </section>
-
-
+            </div>
 
         </div>
-
-
+        
     </body>
 
 </html>

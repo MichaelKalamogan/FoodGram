@@ -9,11 +9,14 @@ const recipeController =  require ('./controllers/recipe_controller')
 const userController =  require('./controllers/user_controller')
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
+const multer = require('multer')
 const passport = require('passport')
+const { upload } = require('./config/multer-config')
+
 
 const app = express();
 const port = 3000;
-const mongoURI = 'mongodb://localhost:27017/FoodGram'
+const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_URL}`
 const { authenticatedOnly, alreadyAuthenticated, verifyUser} = require('./middlewares/auth-middleware');
 
 require('./config/passport-config')(passport)
@@ -65,14 +68,14 @@ app.use((req, res, next) => {
 // index
 app.get('/recipes/home', recipeController.index)
 
-// new
+// form to make a new recipe
 app.get('/recipes/new',authenticatedOnly, recipeController.new)
 
-// show
+// show the full recipe
 app.get('/recipes/:id', recipeController.show)
 
-// create
-app.post('/recipes', authenticatedOnly, recipeController.create)
+// create a new recipe
+app.post('/recipes', authenticatedOnly, upload.single("newImage"), recipeController.create)
 
 //User login page
 app.get('/user/login', alreadyAuthenticated, userController.index)
@@ -89,14 +92,17 @@ app.post('/user/register', alreadyAuthenticated, userController.create)
 //User Dashboard
 app.get('/user/:user_id/dashboard', authenticatedOnly, verifyUser, userController.dashboard)
 
-//Edit the user Profile
+//Page to edit the user Profile
 app.get('/user/:user_id/dashboard/edit', authenticatedOnly, verifyUser, userController.editDashboard)
 
-//Page to edit previous recipe
+//Update the user Profile
+app.post('/user/:user_id/dashboard/edit', authenticatedOnly, verifyUser, upload.single("newImage"), userController.updateDashboard)
+
+//Page to edit user's recipe
 app.get('/user/:user_id/:id/edit', authenticatedOnly, verifyUser, userController.updateRecipeForm)
 
 //Update the recipe
-app.post('/user/:user_id/:id/edit', authenticatedOnly, verifyUser, userController.updateRecipe)
+app.post('/recipe/:user_id/:id/edit', authenticatedOnly, verifyUser, userController.updateRecipe)
 
 app.delete('/user/:user_id/:id/delete', authenticatedOnly, verifyUser, recipeController.delete)
 

@@ -1,9 +1,13 @@
+require('dotenv').config()
 const bcrypt = require('bcryptjs')
 const { UserModel } = require('../models/user')
 const { RecipeModel } = require ('../models/recipe')
+const cloudinary = require('../config/cloudinary-config')
+const multer =  require('multer')
 
 const passport = require('passport')
 const recipe = require('../models/recipe')
+const { name } = require('ejs')
 
 module.exports = {
 
@@ -117,30 +121,72 @@ module.exports = {
         let userRecipes = []
         userRecipes = await RecipeModel.find({user_id: req.user.user_id})
 
-        res.render('dashboard', {name: req.user.user_id, userRecipes: userRecipes})
+        res.render('dashboard', {user: req.user, userRecipes: userRecipes})
 
     },
 
+    // Render the page for updating the user profile fields
     editDashboard: (req,res) => {
         res.render('editDashboard', {user: req.user})
+    },
 
+    //Update the user dashboard
+    updateDashboard: async (req, res) => {
+        let newUpload = null
+
+        //upload the user image to cloudinary if there is one
+        if(req.file) {
+            
+            if(req.user.cloudinary_id) {
+                cloudinary.uploader.destroy(req.user.cloudinary_id)
+            }
+
+            newUpload = cloudinary.uploader.upload(req.file.path);
+
+            await UserModel.updateOne (
+                {user_id: req.user.user_id},
+                {   
+                    $set:{
+                        image: newUpload.secure_url,
+                        cloudinary_id: newUpload.public_id,
+                    }
+                }
+            )   
+        }
+
+        await UserModel.updateOne (
+            {user_id: req.user.user_id},
+
+            {   
+                $set:{
+                    name: req.body.name,
+                    website: req.body.website,
+                    facebook: req.body.facebook,
+                    instagram: req.body.instagram,
+                    pinterest: req.body.pinterest,
+                    updated_date: Date.now()
+                }
+            }
+        )
+        
+        res.redirect('/user/:user_id/dashboard/edit')
     },
 
     //Edit Recipes
-    updateRecipeForm: async (req, res, next) => {
+    updateRecipeForm: async (req, res) => {
+        
+        let userRecipe = []
     
-    let userRecipe = []
+        userRecipe= await RecipeModel.findById(req.params.id)
     
-    userRecipe= await RecipeModel.findById(req.params.id)
-
-        // .then(recipe => {
-            res.render('updateRecipe', {recipe: userRecipe})
-        // })
+            // .then(recipe => {
+                res.render('updateRecipe', {recipe: userRecipe})
+            // })
     },
 
-    updateRecipe: async(req,res,next) => {
-
+    updateRecipe: async (req, res) => {
         let updatedIngredient = []
+        console.log(req.body)
         
         for (let i = 0; i < req.body.ingredient.length; i++) {
             updatedIngredient.push({"item":req.body.ingredient[i]})
@@ -174,6 +220,6 @@ module.exports = {
                 res.redirect('/recipes/' + req.params.id)
                 return
             })
+         
     }
-
 }

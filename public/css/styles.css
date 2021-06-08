@@ -4,16 +4,21 @@ body {
 }
 
 .after-navbar {
-    margin-top: 8em;
+    margin-top: 6em;
 }
 
-.index-container {
+.index-container  {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 0 auto;
     padding: 30px 0 0 0;
+}
+
+#whole-list {
+    margin: 10px auto;
+    justify-content: space-evenly;
 }
 
 .index-card {
@@ -30,12 +35,12 @@ body {
 .snapshot {
 	display: inline;
 	display: inline-block;
-    margin-right: 8px;
     padding: 10px 0;
 }
 
 .snapshot li {
     font-size: 18px;
+    margin-right: 1em;
 }
 
 .bold {
@@ -53,12 +58,12 @@ body {
 
 #show-header {
     display: flex;
-    padding-left: 0;
+    padding: 0;
     margin-top: 15px;
 }
 
-#show-header img{
-    width: 60%;
+#show-image{
+    width: 100%;
 }
 
 #show-aside {

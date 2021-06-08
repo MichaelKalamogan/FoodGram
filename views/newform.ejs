@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <%- include('./partials/head') %>
 
-    </head>
-    
+    <%- include('./partials/head') %>  
     
     <body>
         <%- include('./partials/nav') %>
@@ -14,11 +11,11 @@
             <%- include('./partials/alerts') %>
 
             <div class="after-navbar">
-                <h1>Upload your own recipe!</h1>
+                <h1 class="text-center mb-2">Upload your own recipe!</h1>
 
-                <form method="POST" method="POST" action="/recipes">
+                <form method="POST" action="/recipes" enctype="multipart/form-data">
         
-                    <div class="col-md-8">
+                    <div class="col-md-8 m-auto">
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="row edit-form">
@@ -26,7 +23,21 @@
                                         <h6>Name of Dish</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" name="name" placeholder="Required">
+                                        <input type="text" class="form-control" name="name" 
+                                            <% if (typeof name !== 'undefined') { %>
+                                                value="<%=name%>"
+                                            <%} else {%>
+                                                value="<%=""%>" 
+                                            <%}%> >
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row edit-form">
+                                    <div class="col-sm-3">
+                                        <h6>Picture of the Dish</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="file"  accept="image/gif, image/jpeg, image/png, image/jpg" name="newImage" id="file" required>
                                     </div>
                                 </div>
                                 <hr>
@@ -66,7 +77,7 @@
                                 <hr>
                                 <div class="row edit-form">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Serves</h6>
+                                        <h6 class="mb-0">Time to Cook</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <select class="form-select" name="time">
@@ -134,6 +145,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-info" >Submit</button>
+                                        <a href='/user/<%=user.user_id%>/dashboard'><button type="button" class="btn btn-info" style="background-color: lightgreen;">Go Back Without Saving</button></a>
                                     </div>
                                 </div>
                             </div>
