@@ -10,20 +10,11 @@
 
             <h1 class="text-center mb-2">Update Your Details</h1>
           
-            <form method="POST" action="/user/<%=user.user_id%>/dashboard/edit" enctype="multipart/form-data">
+            <form method="POST" action="/user/<%=user.user_id%>/dashboard/editprofile?_method=PATCH">
     
                 <div class="col-md-8 m-auto">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <div class="row edit-form">
-                                <div class="col-sm-3">
-                                    <h6>Profile Picture</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="file"  accept="image/gif, image/jpeg, image/png, image/jpg" name="newImage" id="file">
-                                </div>
-                            </div>
-                            <hr>
                             <div class="row edit-form">
                                 <div class="col-sm-3">
                                     <h6>Full Name</h6>

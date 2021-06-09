@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <%- include('./partials/head') %>
+    
+    <body>
+    <%- include('./partials/nav') %>
+    </body>
+
+        <div class="after-navbar">
+            <form method="post" action="/recipe/<%=user.user_id%>/<%=recipe._id%>/editphoto?_method=PATCH" enctype="multipart/form-data">
+                <div class="col-md-8  m-auto">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row edit-form">
+                                <div class="col-sm-3">
+                                    <h6>Change Picture of the Dish</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="file"  accept="image/gif, image/jpeg, image/png, image/jpg" name="newImage" id="file">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12" >
+                                    <button type="submit" class="btn btn-info" >Save Changes</button>
+                                    <a href='/user/<%=user.user_id%>/dashboard'><button type="button" class="btn btn-info" style="background-color: lightgreen;">Go Back Without Saving</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+</html>

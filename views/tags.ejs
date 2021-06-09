@@ -11,26 +11,16 @@
          <%- include('./partials/alerts')%>
         <div class="mt-5">
 
-            <div class="row" id="index-filter-btns">
-                <div class="btn-group me-2" role="group" aria-label="Second group" id="filter-button">
-                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Show All</button>
-                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Chinese</button>
-                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Malay</button>
-                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Indian</button>
-                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Italian</button>
-                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Others</button>
-                </div>
-
-                <div>
-                    <div id="searchWrapper">
-                        <form method="POST" action='/recipes/filter'>
-                            <input type="text" name="searchTagInput" id="searchTagInput" placeholder="search #tags"/>
-                            <button type="submit" id="search-tag"><i class="fa fa-search"></i></button>
-                        </form>
+            <div>
+                <div id="searchWrapper" style="display: flex; justify-content:center;">
+                    <form method="POST" action='/recipes/filter'>
+                        <input type="text" name="searchTagInput" id="searchTagInput" placeholder="search #tags"/>
+                        <button type="submit" id="search-tag"><i class="fa fa-search"></i></button>
+                    </form>
                         
-                    </div>
                 </div>
             </div>
+        
             
             <div class="row" id="whole-list">
                 <% for(let i=0; i < recipes.length; i++) { %>
@@ -67,10 +57,8 @@
                         </ul>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                            <p class="card-text"><%= recipes[i].summary %></p>
-                            </div>                        
-                            <div class="row mb-2 mt-3">
+                          <p class="card-text"><%= recipes[i].summary %></p>
+                          <div class="row mb-2 mt-3">
                             <% if(recipes[i].tags) { %>
                                 
                                 <%for(let j = 0; j < recipes[i].tags.length; j++) {%>
@@ -79,10 +67,9 @@
                                 
                             <%}%>
                             </div>
-                          
                           <a href="/recipes/<%= recipes[i]._id%>" class="btn btn-primary">Show Full Recipe</a>
                         </div>
-                    </div>
+                      </div>
     
                 <% } %>
 
@@ -91,13 +78,6 @@
                 
 
         </div>
-
-        <!-- Script file for filtering -->
-        <script> 
-            <%- include("../scripts/index-filter.js") %> 
-        </script> 
-
-
         
     </body>
 

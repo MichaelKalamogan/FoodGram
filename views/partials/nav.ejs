@@ -3,17 +3,8 @@
         <h2>FoodGram<span id="copyright" class="iconify" data-icon="bx:bx-copyright" data-inline="true"></span></h2>
     </span>
     
-    <ul id="nav-bar" class="">
+    <ul id="nav-bar">
         <li class="main-link"><a href="/recipes/home">Home</a></li>
-        <li class="main-link"><a href="#">Cuisine&dtrif;</a>
-        <ul class="dropdown">
-            <li><a href="#">Chinese</a></li>
-            <li><a href="#">Malay</a></li>
-            <li><a href="#">Indian</a></li>
-            <li><a href="#">Italian</a></li>
-            <li><a href="#">Others</a></li>
-        </ul>
-        </li>
         <li class="main-link"><a href="/recipes/new">Upload Your Own Recipe!</a></li>
         <% if (user) { %>
         <li class="main-link"><a href="/user/<%=user.user_id%>/dashboard">Your Dashboard</a></li>

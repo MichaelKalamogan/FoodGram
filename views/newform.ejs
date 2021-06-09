@@ -142,6 +142,20 @@
                                     </div>
                                 </div>
                                 <hr>
+                                <div class="row edit-form">
+                                    <div class="col-sm-3">
+                                        <h6>Tags (#tag seperated by commas)</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" name="newTags" 
+                                            <% if (typeof name !== 'undefined') { %>
+                                                value="<%=newTags%>"
+                                            <%} else {%>
+                                                value="<%=""%>" 
+                                            <%}%> placeholder="#tags seperated by commas">
+                                    </div>
+                                </div>
+                                <hr>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-info" >Submit</button>

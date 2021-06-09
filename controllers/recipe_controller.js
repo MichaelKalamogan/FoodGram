@@ -1,6 +1,7 @@
 const { RecipeModel } = require ('../models/recipe')
 const { UserModel } = require('../models/user')
 const cloudinary = require('../config/cloudinary-config')
+const multer =  require('multer')
 
 module.exports = {
 
@@ -21,6 +22,14 @@ module.exports = {
 
     new: (req, res) => {
         res.render('newform')
+    },
+
+    filter: async(req,res) => {
+
+        let recipes = []
+
+        recipes = await RecipeModel.find({"tags.tag": req.body.searchTagInput})
+        res.render('tags', { recipes: recipes })
     },
 
     show: async(req, res) => {
@@ -48,7 +57,7 @@ module.exports = {
 
     create: async (req, res) => {
 
-        const { name, newImage, cuisine, serves, difficulty, time, summary, ingredient, instructions} = req.body
+        const { name, newImage, cuisine, serves, difficulty, time, summary, ingredient, instructions, newTags} = req.body
 
         //creating an errors array to display all the errors
         let errors = []
@@ -72,7 +81,8 @@ module.exports = {
                 time: time,
                 summary: summary,
                 ingredient: ingredient,            
-                instruction: instructions
+                instruction: instructions,
+                newTags: newTags
             })
 
         } else {
@@ -89,6 +99,14 @@ module.exports = {
                 newInstructions.push({"toDo": req.body.instruction[i]})
             }
 
+            //splitting the tags by comma and removing any whitespace before putting into the schema format
+            let tagsArray = req.body.newTags.split(',')
+            let updatedTagsArray =  []
+
+            for(let i =0; i< tagsArray.length; i++) {
+                updatedTagsArray.push({"tag": tagsArray[i].trim()})
+            }
+
             let newUpload = await cloudinary.uploader.upload(req.file.path);
 
             RecipeModel.create({
@@ -103,12 +121,54 @@ module.exports = {
                 time: time,
                 summary: summary,
                 ingredient: newIngredient,            
-                instruction: newInstructions
+                instruction: newInstructions,
+                tags: updatedTagsArray,
+                created_at: Date.now(),
+                updated_at: Date.now()
             })
                 .then(createResp =>{        
                     res.redirect(`/user/${req.user.user_id}/dashboard`)
                 })
         }
+    },
+
+    editPhotoForm: async (req, res) => {
+
+        let updateRecipe = await RecipeModel.findById(req.params.id)
+        res.render('updateRecipePhoto', {recipe: updateRecipe})
+    },
+
+    editPhoto: async (req,res) => {
+
+        let updateRecipe = await RecipeModel.findById(req.params.id)
+
+        if(updateRecipe.user_id === req.user.user_id) {
+
+
+            let newUpload = await cloudinary.uploader.upload(req.file.path);
+            cloudinary.uploader.destroy(updateRecipe.cloudinary_id)
+
+            RecipeModel.updateOne(
+                { _id: req.params.id},
+                {
+                    $set: {
+                        image: newUpload.secure_url,
+                        cloudinary_id: newUpload.public_id,
+                        updated_at: Date.now()
+                    }
+                }
+            )
+
+                .then(updatedRecipe => {
+                
+                    res.redirect(`/user/${req.user.user_id}/dashboard`)
+                    return
+                })
+
+        } else {
+            res.send('Failed update')
+        }
+
     },
 
     delete: async (req, res) => {

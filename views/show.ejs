@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html>
     <%- include('./partials/head') %>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
     <body>
         <%- include('./partials/nav') %>
 
-        <div class="container after-navbar">
+        <div class="row after-navbar">
 
-            <div class="container">
+            <div>
                 <div class="row">
-                    <h1 id="main-name"><%=recipe.name%></h1>
-                </div>   
-            </div>
-            
+                    <h1 id="main-name" style="margin-bottom: 20px;"><%=recipe.name%></h1>
+                </div>
+                <div class="row" id="show-header-container">
 
-            <div class="container">
-                
-                <div class="row">
-
-                    <div class="col-md-8">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/oatmeal.jpg" alt="Chai Oatmeal" id="show-image"/>
+                    <div class="col-md-8 ms-10">
+                        <img src="<%=recipe.image%>" alt=".." id="show-image"/>
                         
-                        <div class="row" style="margin-left: 0;">                        
+                        <div class="row" id="show-image">                        
                             <ul class="snapshot">
-                                <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipe.serves%> </span></li>
-                                <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipe.time%></span></li>
+                                <li class="show-snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipe.serves%> </span></li>
+                                <li class="show-snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipe.time%></span></li>
                                 <% if(recipe.difficulty === 'Easy') { %>
-                                <li class="snapshot" ><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                                <li class="show-snapshot" ><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
                                 <% } else if(recipe.difficulty === 'Medium') { %>
-                                    <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                                    <li class="show-snapshot"><span class="iconify" data-icon="mdi:signal-cellular-2" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
                                 <% } else if(recipe.difficulty === 'Hard') { %>
-                                    <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
+                                    <li class="show-snapshot"><span class="iconify" data-icon="mdi:signal-cellular-3" data-inline="true"></span><span><%=recipe.difficulty%></span></li>
                                 <% } %>
                                 
                                 <% if(recipe.reviews.length > 0) { %>
@@ -40,7 +36,7 @@
                                     <% return a + b; %>
                                     <% }, 0) %>
                                     <% averageReviews = sumReviews/reviews.length %>                        
-                                    <li class="snapshot"><span><%= averageReviews %></span></li>
+                                    <li class="show-snapshot"><span><%= averageReviews %></span></li>
                             
                                 <% } %>                            
                             </ul>   
@@ -48,7 +44,7 @@
                     </div>
                     
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
@@ -65,13 +61,13 @@
                                             <li><a href="<% userReq.website %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
                                         <% } %>
                                         <%if (userReq.facebook) { %>
-                                            <li><a href="<% userReq.facebook %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                            <li><a href="<% userReq.facebook %>"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
                                         <% } %>
                                         <%if (userReq.instagram) { %>
-                                            <li><a href="<% userReq.instagram %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                            <li><a href="<% userReq.instagram %>"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
                                         <% } %>
                                         <%if (userReq.pinterest) { %>
-                                            <li><a href="<% userReq.pinterest %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
+                                            <li><a href="<% userReq.pinterest %>"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
                                         <% } %>
                                     </ul>
                                 </div> 
@@ -80,34 +76,30 @@
                     </div>
                 </div>
             
-            </div>            
-    
-            <div class="container mt-2">
-                <h2>Ingredients List</h2>
-                <table>
-                    <%for(let i=0; i < recipe.ingredient.length; i++) { %>
-                        <tr>
-                            <td><%= i+1 %>.</td>
-                            <td><%= recipe.ingredient[i].item %></td>
-                            <td><%= recipe.ingredient[i].quantity %></td>
-                        </tr>
-                    <% } %>
-                </table>
-            </div>
-    
-            <div class="container mt-5">
-                <h2> How To Cook</h2>
-                <table>
-                    <%for(let i=0; i < recipe.instruction.length; i++) { %>
-                        <tr>
-                            <td><%= recipe.instruction[i].step %>.</td>
-                            <td><%= recipe.instruction[i].toDo %></td>
-                        </tr>
-                    <% } %>
-                </table>
-    
-            </div>
+            </div>    
+        </div>
+            
 
+        <div class="row mt-10" id="ingredient-instructions">
+                
+            <div class="col-md-4" style="margin-right: 30px;">
+                <h2 class="show-header">Ingredients List</h2>
+                <ul style="padding: 0; text-align: justify;">
+                    <%for(let i=0; i < recipe.ingredient.length; i++) { %>
+                        <li style="list-style: none; margin-bottom: 10px;"><%= recipe.ingredient[i].item %></li>
+                    <% } %>
+                    </ul>
+            </div>
+    
+            <div class="col-md-4">
+                <h2 class="show-header"> How To Cook</h2>
+                <ol style="text-align: justify;">
+                <%for(let j=0; j < recipe.instruction.length; j++) { %>
+                     <li style="margin-bottom: 10px;"><%= recipe.instruction[j].toDo %></li>
+                <% } %>
+                </ol>
+        
+            </div>
         </div>
         
     </body>

@@ -18,6 +18,7 @@ const app = express();
 const port = 3000;
 const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_URL}`
 const { authenticatedOnly, alreadyAuthenticated, verifyUser} = require('./middlewares/auth-middleware');
+const recipe = require('./models/recipe')
 
 require('./config/passport-config')(passport)
 
@@ -71,6 +72,8 @@ app.get('/recipes/home', recipeController.index)
 // form to make a new recipe
 app.get('/recipes/new',authenticatedOnly, recipeController.new)
 
+app.post('/recipes/filter',recipeController.filter)
+
 // show the full recipe
 app.get('/recipes/:id', recipeController.show)
 
@@ -93,17 +96,30 @@ app.post('/user/register', alreadyAuthenticated, userController.create)
 app.get('/user/:user_id/dashboard', authenticatedOnly, verifyUser, userController.dashboard)
 
 //Page to edit the user Profile
-app.get('/user/:user_id/dashboard/edit', authenticatedOnly, verifyUser, userController.editDashboard)
+app.get('/user/:user_id/dashboard/editprofile', authenticatedOnly, verifyUser, userController.editDashboard)
 
 //Update the user Profile
-app.post('/user/:user_id/dashboard/edit', authenticatedOnly, verifyUser, upload.single("newImage"), userController.updateDashboard)
+app.patch('/user/:user_id/dashboard/editprofile', authenticatedOnly, verifyUser, userController.updateDashboard)
+
+//Page to edit the user photo
+app.get('/user/:user_id/dashboard/editprofilephoto', authenticatedOnly, verifyUser, userController.editProfilePhoto)
+
+//Update the user photo
+app.patch('/user/:user_id/dashboard/editprofilephoto', authenticatedOnly, verifyUser, upload.single("newImage"), userController.updateProfilePhoto)
 
 //Page to edit user's recipe
-app.get('/user/:user_id/:id/edit', authenticatedOnly, verifyUser, userController.updateRecipeForm)
+app.get('/recipe/:user_id/:id/editrecipe', authenticatedOnly, verifyUser, userController.updateRecipeForm)
 
 //Update the recipe
-app.post('/recipe/:user_id/:id/edit', authenticatedOnly, verifyUser, userController.updateRecipe)
+app.patch('/recipe/:user_id/:id/editrecipe', authenticatedOnly, verifyUser, userController.updateRecipe)
 
+//change the photo of the recipe
+app.get('/recipe/:user_id/:id/editrecipephoto',authenticatedOnly, verifyUser, recipeController.editPhotoForm)
+
+//change the photo of the recipe
+app.patch('/recipe/:user_id/:id/editphoto',authenticatedOnly, verifyUser, upload.single("newImage"), recipeController.editPhoto)
+
+//delete the recipe
 app.delete('/user/:user_id/:id/delete', authenticatedOnly, verifyUser, recipeController.delete)
 
 

@@ -121,6 +121,7 @@ module.exports = {
         let userRecipes = []
         userRecipes = await RecipeModel.find({user_id: req.user.user_id})
 
+
         res.render('dashboard', {user: req.user, userRecipes: userRecipes})
 
     },
@@ -132,28 +133,7 @@ module.exports = {
 
     //Update the user dashboard
     updateDashboard: async (req, res) => {
-        let newUpload = null
-
-        //upload the user image to cloudinary if there is one
-        if(req.file) {
-            
-            if(req.user.cloudinary_id) {
-                cloudinary.uploader.destroy(req.user.cloudinary_id)
-            }
-
-            newUpload = cloudinary.uploader.upload(req.file.path);
-
-            await UserModel.updateOne (
-                {user_id: req.user.user_id},
-                {   
-                    $set:{
-                        image: newUpload.secure_url,
-                        cloudinary_id: newUpload.public_id,
-                    }
-                }
-            )   
-        }
-
+        
         await UserModel.updateOne (
             {user_id: req.user.user_id},
 
@@ -169,8 +149,43 @@ module.exports = {
             }
         )
         
-        res.redirect('/user/:user_id/dashboard/edit')
+        res.redirect('/user/:user_id/dashboard/')
     },
+
+    // Render the page for updating the user photo
+    editProfilePhoto: (req, res) => {
+        res.render('editProfilePhoto', {user: req.user})
+    },
+    
+    //Update the user dashboard
+    updateProfilePhoto: async (req, res) => {
+
+        let newUpload = null
+
+        //upload the user image to cloudinary if there is one
+        if(req.file) {
+            
+            if(req.user.cloudinary_id) {
+                cloudinary.uploader.destroy(req.user.cloudinary_id)
+            }
+
+            newUpload = await cloudinary.uploader.upload(req.file.path);
+
+            await UserModel.updateOne (
+                {user_id: req.user.user_id},
+                {   
+                    $set:{
+                        image: newUpload.secure_url,
+                        cloudinary_id: newUpload.public_id,
+                    }
+                }
+            )   
+        }
+
+        res.redirect('/user/:user_id/dashboard/')
+
+    },
+
 
     //Edit Recipes
     updateRecipeForm: async (req, res) => {
@@ -186,7 +201,6 @@ module.exports = {
 
     updateRecipe: async (req, res) => {
         let updatedIngredient = []
-        console.log(req.body)
         
         for (let i = 0; i < req.body.ingredient.length; i++) {
             updatedIngredient.push({"item":req.body.ingredient[i]})
@@ -196,7 +210,15 @@ module.exports = {
     
         for(let i =0; i< req.body.instruction.length; i++) {
             updatedInstructions.push({"toDo": req.body.instruction[i]})
-        }         
+        }
+        
+        //splitting the tags by comma and removing any whitespace before putting into the schema format
+        let tagsArray = req.body.updateTags.split(',')
+        let updatedTagsArray =  []
+
+        for(let i =0; i< tagsArray.length; i++) {
+            updatedTagsArray.push({"tag": tagsArray[i].trim()})
+        }
         
         RecipeModel.updateOne(
             { _id: req.params.id},
@@ -210,6 +232,7 @@ module.exports = {
                     summary: req.body.summary,
                     ingredient: updatedIngredient,            
                     instruction: updatedInstructions,
+                    tags: updatedTagsArray,
                     updated_at: Date.now()
                 }
             }

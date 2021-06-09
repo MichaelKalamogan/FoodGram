@@ -10,6 +10,7 @@ const recipeSchema = new mongoose.Schema ({
     summary: { type: String},
     ingredient: [{item: {type: String}}],
     instruction: [{toDo : {type: String}}],
+    tags: [{tag: {type: String}}],
     image: {type: String},
     cloudinary_id: {type: String},
     reviews: [{
