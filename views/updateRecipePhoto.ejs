@@ -4,19 +4,21 @@
     
     <body>
     <%- include('./partials/nav') %>
-    </body>
+    
 
         <div class="after-navbar">
+
+            <h1 class="text-center mb-2">Update Picture of Dish</h1>
             <form method="post" action="/recipe/<%=user.user_id%>/<%=recipe._id%>/editphoto?_method=PATCH" enctype="multipart/form-data">
-                <div class="col-md-8  m-auto">
+                <div class="col-md-5  m-auto">
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="row edit-form">
                                 <div class="col-sm-3">
-                                    <h6>Change Picture of the Dish</h6>
+                                    <h6>Upload</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="file"  accept="image/gif, image/jpeg, image/png, image/jpg" name="newImage" id="file">
+                                    <input type="file"  accept="image/gif, image/jpeg, image/png, image/jpg, image/webp" name="newImage" id="file">
                                 </div>
                             </div>
                             <hr>
@@ -31,4 +33,5 @@
                 </div>
             </form>
         </div>
+    </body>
 </html>

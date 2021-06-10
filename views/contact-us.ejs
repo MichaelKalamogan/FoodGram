@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <%- include('./partials/head') %>
+    <body>
+        <%- include('./partials/nav') %>
+        <%- include('./partials/alerts') %> 
+
+        <div class="row" style="margin-top: 5em;">
+            <div class="col-md-6 m-auto">
+              <div class="card card-body">
+                <h1 class="text-center mb-3" style="font-family: 'Lobster', cursive, sans-serif;"> Contact us </h1>
+                <p style="font-family: 'Lobster', sans-serif; text-align: justify;";>Please give us your comments to improve the site or if we have not given the appropriate recognition to the original recipe owner</p>
+                <form action="/contact-us" method="POST" style="margin-top: 5px;">
+                  <div class="form-group">
+                    <label for="name">Name (Required)</label>
+                    <input type="name" id="name" name="name" class="form-control" placeholder="Enter Name" 
+                        <% if (typeof name !== 'undefined') { %>
+                            value="<%=name%>"
+                        <%} else {%>
+                            value="<%=""%>" 
+                        <%}%>/>
+                  </div>
+                  <div class="form-group" style="margin-top: 10px;">
+                    <label for="email">Email (Required)</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+                        <% if (typeof email !== 'undefined') { %>
+                            value="<%=email%>"
+                        <%} else {%>
+                            value="<%=""%>" 
+                        <%}%>/>
+                  </div>
+
+                  <div class="form-group" style="margin-top: 10px;">
+                    <label for="floatingTextarea" >Comments/Suggestions/Feedback</label>
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="comments"
+                    <% if (typeof comments !== 'undefined') { %>
+                      value="<%=comments%>"
+                    <%} else {%>
+                      value="<%=""%>" 
+                    <%}%>></textarea>
+                    
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" style="margin-top: 10px;">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        
+    </body>
+
+</html>

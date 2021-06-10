@@ -15,7 +15,9 @@ const recipeSchema = new mongoose.Schema ({
     cloudinary_id: {type: String},
     reviews: [{
         rating: { type: Number },
-        comment:{ type: String }
+        comment:{ type: String },
+        user_id: { type: String },
+        created: { type: Date, default: Date.now}
     }],
     created_at: { type: Date, default: Date.now},
     updated_at: { type: Date, default: Date.now}

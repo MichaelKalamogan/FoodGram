@@ -29,6 +29,8 @@ app.set('view engine', 'ejs')
 // =======================================
 //              MIDDLEWARES
 // =======================================
+
+// setting up middleware to support sessions
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -36,6 +38,8 @@ app.use(
     saveUninitialized: false
   })
 );
+
+
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -57,7 +61,6 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.locals.success_message = req.flash('success_message');
   res.locals.error_message = req.flash('error_message');
-  res.locals.suggestion = req.flash('suggestion');
   next();
 });
 
@@ -66,8 +69,17 @@ app.use((req, res, next) => {
 //              ROUTES
 // =======================================
 
-// index
+// create a new recipe
+app.post('/recipes', authenticatedOnly, upload.single("newImage"), recipeController.create)
+
+// Homepage, accessible to all
 app.get('/recipes/home', recipeController.index)
+
+//Contact page
+app.get('/contact-us', recipeController.contact)
+
+//Feedback post
+app.post('/contact-us', recipeController.feedbackCreate)
 
 // form to make a new recipe
 app.get('/recipes/new',authenticatedOnly, recipeController.new)
@@ -77,8 +89,8 @@ app.post('/recipes/filter',recipeController.filter)
 // show the full recipe
 app.get('/recipes/:id', recipeController.show)
 
-// create a new recipe
-app.post('/recipes', authenticatedOnly, upload.single("newImage"), recipeController.create)
+//insert a review
+app.patch('/recipes/:id', authenticatedOnly, recipeController.addReview)
 
 //User login page
 app.get('/user/login', alreadyAuthenticated, userController.index)

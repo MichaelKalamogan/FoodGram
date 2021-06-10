@@ -207,15 +207,13 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-12">
-                                <button type="submit" class="btn btn-info" >Save Changes</button>
+                                <button type="submit" class="btn btn-info" onclick="return confirm('Submit changes?');">Save Changes</button>
                                 <a href='/user/<%=user.user_id%>/dashboard'><button type="button" class="btn btn-info" style="background-color: lightgreen;">Go Back Without Saving</button></a>
                             </div>
                         </div>
                     </div>
                 </div>      
             </div>
-    
-
         </form>
         
     </div>

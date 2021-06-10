@@ -1,7 +1,11 @@
 const { RecipeModel } = require ('../models/recipe')
 const { UserModel } = require('../models/user')
+const { FeedbackModel } = require('../models/feedback')
 const cloudinary = require('../config/cloudinary-config')
 const multer =  require('multer')
+// const streamifier = require('streamifier')
+// const { streamUpload } = require('../config/multer-config')
+
 
 module.exports = {
 
@@ -11,13 +15,37 @@ module.exports = {
         recipes = await RecipeModel.find()
 
         if(!req.user) {
-            await req.flash('suggestion', 'Log In to upload your own recipe, give ratings and receive comments on your own recipes! ')
-            res.render('index', { recipes: recipes })
-        } else {
+            
+            req.flash('success_message', 'Log In to upload your own recipe, give ratings and receive comments on your own recipes! ')
+        } 
 
-            res.render('index', { recipes: recipes })
-        }
+        res.render('index', { recipes: recipes })
         
+
+
+        
+    },
+
+    contact: (req, res) => {
+        res.render('contact-us')
+    },
+
+    feedbackCreate: async(req, res) => {    
+        const {name, email, comments} = req.body
+
+        if(!name || !email) {
+            await req.flash('error_message', 'Both Name and email address must be filled up')
+            res.render('contact-us', {name: name, email: email, comments: comments})
+        } else {
+            FeedbackModel.create ({
+                name: name,
+                email: email,
+                comments: comments
+            })
+            .then(createResp =>{        
+                res.redirect('/recipes/home')
+            })
+        }
     },
 
     new: (req, res) => {
@@ -171,12 +199,30 @@ module.exports = {
 
     },
 
+    addReview: async (req, res) => {
+
+       let updateRecipe = await RecipeModel.updateOne(
+            { _id: req.params.id},
+            {
+                $push: {
+                    reviews: {rating: req.body.rating, comment: req.body.comment, user_id: req.user.user_id}   
+                }
+            }
+        )
+        
+        res.redirect(`/recipes/${req.params.id}`)
+    },
+
     delete: async (req, res) => {
         
         let deleteRecipe = await RecipeModel.findOne({_id: req.params.id})
         if (deleteRecipe.user_id === req.user.user_id) {
             await RecipeModel.deleteOne( {_id: req.params.id})
-            await cloudinary.uploader.destroy(deleteRecipe.cloudinary_id)
+
+            if(deleteRecipe.cloudinary_id) {
+                await cloudinary.uploader.destroy(deleteRecipe.cloudinary_id)
+            }
+            
         }
     
         res.redirect(`/user/${req.user.user_id}/dashboard`)

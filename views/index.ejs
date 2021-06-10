@@ -35,14 +35,14 @@
             <div class="row" id="whole-list">
                 <% for(let i=0; i < recipes.length; i++) { %>
 
-                    <div class="card index-card <%=recipes[i].cuisine%>" style="width: 24rem; height: auto;">
-                        <h5 class="card-title mt-3 mb-3 text-center"><%=recipes[i].name%></h5>
+                    <div class="card index-card <%=recipes[i].cuisine%>" style="width: 24rem; height: 40%;">
+                        <h4 class="card-title mt-3 mb-3 text-center"><%=recipes[i].name%></h4>
                         <div class="embed-responsive">
-                            <img src="<%=recipes[i].image%>" class="card-img-top" alt="...">
+                            <img src="<%=recipes[i].image%>" class="card-img-top" alt="..." style="max-height: 50vh;">
                         </div>
                         <div class="card-header p-0 m-auto" style="height: fit-content;">
-                          <ul class="snapshot">
-                            <li class="snapshot"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipes[i].serves%> </span></li>
+                          <ul class="snapshot" style="margin: 10px 0 0 0">
+                            <li class="snapshot" style="margin:0 12px 0 12px;"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipes[i].serves%> </span></li>
                             <li class="snapshot"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipes[i].time%></span></li>
                             <% if(recipes[i].difficulty === 'Easy') { %>
                             <li class="snapshot"><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
@@ -53,16 +53,12 @@
                             <% } %>
                             
                             <% if(recipes[i].reviews.length > 0) { %>
-                                <% let reviews = recipes[i].reviews %>
-                                <% let averageReviews = 0 %>
-                                <% reviews = reviews.reduce(function(a, b){ %>
-                                   <% return a + b; %>
-                                <% }, 0) %>
-                                <% averageReviews = sumReviews/reviews.length %>    
-    
-    
-                                <li class="snapshot"><span><%= averageReviews %></span></li>
-                            
+                                <% let ratingSum = 0; %>
+                                <% for (let j = 0; j<recipes[i].reviews.length; j++) { %>
+                                    <% ratingSum += recipes[i].reviews[j].rating %>
+                                <% } %>
+                                <% let averageReviews = ratingSum/recipes[i].reviews.length %>        
+                                <li class="snapshot"><span><%=averageReviews.toFixed(2)%><span class="iconify" data-icon="typcn-star" data-inline="true"></span></span></li>
                             <% } %>
                         </ul>
                         </div>
@@ -71,12 +67,13 @@
                             <p class="card-text"><%= recipes[i].summary %></p>
                             </div>                        
                             <div class="row mb-2 mt-3">
+                            <% let indexTags = '' %>
                             <% if(recipes[i].tags) { %>
                                 
                                 <%for(let j = 0; j < recipes[i].tags.length; j++) {%>
-                                    <%=recipes[i].tags[j].tag%> 
+                                    <%indexTags += recipes[i].tags[j].tag + ' '%>
                                 <%}%>
-                                
+                                <p style="font-size: 0.9em;"><%=indexTags.trim()%></p>
                             <%}%>
                             </div>
                           

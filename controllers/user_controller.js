@@ -4,10 +4,10 @@ const { UserModel } = require('../models/user')
 const { RecipeModel } = require ('../models/recipe')
 const cloudinary = require('../config/cloudinary-config')
 const multer =  require('multer')
+const streamifier = require('streamifier')
 
 const passport = require('passport')
-const recipe = require('../models/recipe')
-const { name } = require('ejs')
+
 
 module.exports = {
 
