@@ -85,7 +85,7 @@ module.exports = {
         }
        
         let userReq = await UserModel.findOne({user_id: recipeReq.user_id})
-        console.log(userReq)
+
             if(userReq) {
                 res.render('show', { recipe : recipeReq ,userReq: userReq} )
             } else {

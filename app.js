@@ -17,7 +17,7 @@ require('express-async-errors');
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_URL}`
 const { authenticatedOnly, alreadyAuthenticated, verifyUser} = require('./middlewares/auth-middleware');
 const recipe = require('./models/recipe')

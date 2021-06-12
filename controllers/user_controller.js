@@ -175,8 +175,6 @@ module.exports = {
 
     resetPassword: async (req,res) => {
       
-        //let updateUserPass = UserModel.findById(id)
-        //console.log(updateUserPass.password)
         const {id, token} = req.params
 
         const resetUser = await UserModel.findOne({_id : id})
@@ -346,7 +344,6 @@ module.exports = {
             }
     
             newUpload = await streamUpload(req);
-            console.log('1: ' + newUpload)
 
             let updated = await RecipeModel.updateOne(
                 { _id: req.params.id},
@@ -358,8 +355,6 @@ module.exports = {
                     }
                 }
             )
-
-            console.log('2' + updated)
         }
 
 
