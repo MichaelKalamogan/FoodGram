@@ -2,6 +2,9 @@ const mongoose= require('mongoose')
 
 const recipeSchema = new mongoose.Schema ({
     name: { type: String, required: true },
+    prepared_by: { type: String },
+    owner_image: { type: String },
+    owner_cloud_id: { type: String },
     cuisine: { type: String, required: true },
     user_id: {type: String, required: true},
     serves: { type: String, required: true },
@@ -13,6 +16,10 @@ const recipeSchema = new mongoose.Schema ({
     tags: [{tag: {type: String}}],
     image: {type: String},
     cloudinary_id: {type: String},
+    website: {type: String},
+    facebook: {type: String},
+    instagram: {type: String},
+    pinterest: {type: String},
     reviews: [{
         rating: { type: Number },
         comment:{ type: String },

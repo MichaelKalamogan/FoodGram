@@ -2,14 +2,15 @@
 <html>
     <%- include('./partials/head') %>
     <body>
-        <div class="row mt-5">
+      <%- include('./partials/nav') %>
+
+      <%- include('./partials/alerts') %>
+
+        <div class="row" style="margin-top: 5em;">
             <div class="col-md-6 m-auto">
               <div class="card card-body">
-                <h1 class="text-center mb-3">
-                  <i class="fas fa-user-plus"></i> Register</h1>
-                
-                <%- include('./partials/alerts') %>
-
+                <h1 class="text-center mb-3">Register</h1>
+          
                 <form action="/user/register" method="POST">
                   <div class="form-group">
                     <label for="name">Name</label>
@@ -46,7 +47,7 @@
                     <label for="password2">Confirm Password</label>
                     <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password"/>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-block">
+                  <button type="submit" class="btn btn-primary btn-block mt-1">
                     Register
                   </button>
                 </form>

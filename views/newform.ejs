@@ -34,6 +34,19 @@
                                 <hr>
                                 <div class="row edit-form">
                                     <div class="col-sm-3">
+                                        <h6 class="mb-0">Prepared by</h6>
+                                        <h6>(if left blank, will follow user id)</h6>
+                                    </div>
+                                    
+                                    <div class="col-sm-9 text-secondary">
+                                        <div id="updateTags">
+                                            <input type="text" class="form-control mb-2" name="prepared_by" value="<%=user.user_id%>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row edit-form">
+                                    <div class="col-sm-3">
                                         <h6>Picture of the Dish</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
@@ -49,11 +62,14 @@
                                         <select  class="form-select" name="cuisine"> 
                                             <option selected>Cuisine Type</option>
                                                 <option value="chinese">Chinese</option>
-                                                <option value="malay">Malay</option>
                                                 <option value="indian">Indian</option>
+                                                <option value="japanese">japanese</option>
+                                                <option value="middle-eastern">Middle Eastern</option>
                                                 <option value="french">French</option>
-                                                <option value="french">Italian</option>
-                                                <option value="western">Asian</option>
+                                                <option value="italian">Italian</option>
+                                                <option value="spanish">Spanish</option>
+                                                <option value="mexican">Mexican</option>                                                
+                                                <option value="asian">Asian</option>
                                                 <option value="others">Others</option>
                                         </select>
                                     </div>
@@ -112,7 +128,12 @@
                                         <h6 class="mb-0">Summary of Dish</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <textarea class="form-control" rows="3" name="summary" placeholder="Brief Summary of Dish"></textarea>
+                                        <textarea class="form-control" rows="3" name="summary" placeholder="Brief Summary of Dish" 
+                                        <% if (typeof summary  !== 'undefined') { %>
+                                            value="<%=summary %>"
+                                        <%} else {%>
+                                            value=""
+                                        <%}%> ></textarea>
                                     </div>
                                 </div>
                                 <hr>
@@ -122,10 +143,15 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <div id="ingredientList">
-                                            <input type="text" class="form-control mb-2" name="ingredient[]" placeholder="Ingredient, Amount Required (E.g: Salt, 500mg)">
+                                            <input type="text" class="form-control mb-2" name="ingredient[]" placeholder="Ingredient, Amount Required (E.g: Salt, 500mg)" 
+                                            <% if (typeof ingredient !== 'undefined') { %>
+                                                value="<%=ingredient%>"
+                                            <%} else {%>
+                                                value="" 
+                                            <%}%>>
                                         </div>                               
-                                        <button type="button" class="btn btn-outline-primary" id="add-ingredient">Add</button>
-                                        <button type="button" class="btn btn-outline-danger" id="del-ingredient">Delete</button>
+                                        <button type="button" class="btn btn-outline-primary mt-1" id="add-ingredient">Add</button>
+                                        <button type="button" class="btn btn-outline-danger mt-1" id="del-ingredient">Delete</button>
                                     </div>
                                 </div>
                                 <hr>
@@ -135,10 +161,15 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <div id="instructionList">
-                                            <input type="text" class="form-control mb-2" name="instruction[]" placeholder="Step to Take">           
+                                            <input type="text" class="form-control mb-2" name="instruction[]" placeholder="Step to Take" 
+                                            <% if (typeof instruction !== 'undefined') { %>
+                                                value="<%=instruction%>"
+                                            <%} else {%>
+                                                value="" 
+                                            <%}%>>           
                                         </div>
-                                        <button type="button" class="btn btn-outline-primary" id="add-steps">Add</button>
-                                        <button type="button" class="btn btn-outline-danger" id="delete-steps">Delete</button>
+                                        <button type="button" class="btn btn-outline-primary mt-1" id="add-steps">Add</button>
+                                        <button type="button" class="btn btn-outline-danger mt-1" id="delete-steps">Delete</button>
                                     </div>
                                 </div>
                                 <hr>
@@ -148,11 +179,11 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="text" class="form-control" name="newTags" 
-                                            <% if (typeof name !== 'undefined') { %>
+                                            <% if (typeof newTags !== 'undefined') { %>
                                                 value="<%=newTags%>"
                                             <%} else {%>
-                                                value="<%=""%>" 
-                                            <%}%> placeholder="#tags separated by commas">
+                                                value="" 
+                                            <%}%>>
                                     </div>
                                 </div>
                                 <hr>

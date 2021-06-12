@@ -5,10 +5,12 @@ module.exports = {
         if (req.isAuthenticated()) {
             
             return next();
+        } else {
+
+            req.flash('error_message', "Please login to proceed.")
+            res.render('login', {success_message: req.flash('error_message')})
+            return
         }
-        
-        req.flash('error_message', "Please login to proceed.")
-        res.redirect('/user/login')
     },
 
     alreadyAuthenticated: (req, res, next) => {
@@ -29,7 +31,7 @@ module.exports = {
         } else {
 
             req.flash('error_message', "Invalid credentials")
-            res.redirect('/user/login')
+            res.redirect('/user/login', {error_message: req.flash('error_message')})
         }
 
     }

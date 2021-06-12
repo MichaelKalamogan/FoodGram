@@ -140,3 +140,8 @@ div.edit-recipe{
     border: 4px double lightblue;
     margin-bottom: 40px;
 }
+
+.index-recipe-summary {
+    overflow: scroll;
+
+}

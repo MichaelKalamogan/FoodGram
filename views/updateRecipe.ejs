@@ -8,11 +8,42 @@
     <%- include('./partials/nav') %>
 
     <div class="after-navbar">
-        <form method="POST" action="/recipe/<%=user.user_id%>/<%=recipe._id%>/editrecipe?_method=PATCH">
+        <form method="POST" action="/recipe/<%=user.user_id%>/<%=recipe._id%>/editrecipe?_method=PATCH" enctype="multipart/form-data">
 
             <div class="col-md-8">
                 <div class="card mb-3">
                     <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Prepared by</h6>
+                                <h6>(if left blank, will follow user id)</h6>
+                            </div>
+                            
+                            <div class="col-sm-9 text-secondary">
+                                <div id="updateTags">
+                                    <input type="text" class="form-control mb-2" name="prepared_by" 
+                                        <%if ( recipe.prepared_by && recipe.prepared_by!=='') { %>
+                                            value="<%=recipe.prepared_by%>"
+                                        <% } else { %>  
+                                            value="<%=user.user_id%>"
+                                        <% } %>>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row edit-form">
+                            <div class="col-sm-3">
+                                <h6>Picture of Recipe Owner</h6>
+                                <h6>(if left blank, will follow user id)</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="file"  accept="image/gif, image/jpeg, image/png, image/jpg, image/webp" name="newImage" id="file">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row edit-form">
+
                         <div class="row edit-form">
                             <div class="col-sm-3">
                                 <h6>Name of Dish</h6>
@@ -32,10 +63,6 @@
                                         <%if(recipe.cuisine === 'chinese') {%> 
                                             selected 
                                         <% } %>>Chinese</option>
-                                    <option value="malay"
-                                        <%if(recipe.cuisine === 'malay') {%> 
-                                            selected 
-                                        <% } %>>Malay</option>
                                     <option value="indian" 
                                         <%if(recipe.cuisine === 'indian') {%> 
                                             selected 
@@ -48,6 +75,23 @@
                                         <%if(recipe.cuisine === 'italian') {%> 
                                             selected 
                                         <% } %>>Italian</option>
+
+                                    <option value="mexican"
+                                        <%if(recipe.cuisine === 'mexican') {%> 
+                                            selected 
+                                        <% } %>>Mexican</option>
+                                    <option value="japanese"
+                                        <%if(recipe.cuisine === 'japanese') {%> 
+                                            selected 
+                                        <% } %>>Mexican</option>
+                                    <option value="middle-eastern"
+                                        <%if(recipe.cuisine === 'middle-eastern') {%> 
+                                            selected 
+                                        <% } %>>Middle Eastern</option>
+                                    <option value="spanish"
+                                        <%if(recipe.cuisine === 'spanish') {%> 
+                                            selected 
+                                        <% } %>>Spanish</option>
                                     <option value="asian"
                                         <%if(recipe.cuisine === 'asian') {%> 
                                             selected 
@@ -203,6 +247,77 @@
                                     <input type="text" class="form-control mb-2" name="updateTags" value="<%=updateTagsArray.join()%>">
                                 </div>
                             </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <h5 style="text-align: center; padding-bottom: 5px;">Social Media Links (if none provided, the user's general links will be used.)</h5>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Website</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <div id="updateTags">
+                                        <input type="text" class="form-control mb-2" name="website" 
+                                        <%if ( recipe.website && recipe.website !=='') { %>
+                                            value="<%=recipe.website%>"
+                                        <% } else { %>  
+                                            value="<%=user.website%>"
+                                        <% } %>>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Facebook</h6>
+                                </div>
+                                
+                                <div class="col-sm-9 text-secondary">
+                                    <div id="updateTags">
+                                        <input type="text" class="form-control mb-2" name="facebook" 
+                                            <%if ( recipe.facebook && recipe.facebook !=='') { %>
+                                                value="<%=recipe.facebook%>"
+                                            <% } else { %>  
+                                                value="<%=user.facebook%>"
+                                            <% } %>>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Instagram</h6>
+                                </div>
+                                
+                                <div class="col-sm-9 text-secondary">
+                                    <div id="updateTags">
+                                        <input type="text" class="form-control mb-2" name="instagram" 
+                                            <%if ( recipe.instagram && recipe.instagram !=='') { %>
+                                                value="<%=recipe.instagram%>"
+                                            <% } else { %>  
+                                                value="<%=user.instagram%>"
+                                            <% } %>>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Pinterest</h6>
+                                </div>
+                                
+                                <div class="col-sm-9 text-secondary">
+                                    <div id="updateTags">
+                                        <input type="text" class="form-control mb-2" name="pinterest" 
+                                            <%if ( recipe.pinterest && recipe.pinterest !=='') { %>
+                                                value="<%=recipe.pinterest%>"
+                                            <% } else { %>  
+                                                value="<%=user.pinterest%>"
+                                            <% } %>>
+                                    </div>
+                                </div>
+                            </div>                            
                         </div>
                         <hr>
                         <div class="row">

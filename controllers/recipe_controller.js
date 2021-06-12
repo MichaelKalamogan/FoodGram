@@ -3,13 +3,14 @@ const { UserModel } = require('../models/user')
 const { FeedbackModel } = require('../models/feedback')
 const cloudinary = require('../config/cloudinary-config')
 const multer =  require('multer')
-// const streamifier = require('streamifier')
-// const { streamUpload } = require('../config/multer-config')
+const streamifier = require('streamifier')
+const { streamUpload } = require('../config/multer-config')
 
 
 module.exports = {
 
     index: async (req, res, next) => {
+
         let recipes = []
 
         recipes = await RecipeModel.find()
@@ -19,11 +20,17 @@ module.exports = {
             req.flash('success_message', 'Log In to upload your own recipe, give ratings and receive comments on your own recipes! ')
         } 
 
-        res.render('index', { recipes: recipes })
-        
+        res.render('index', { success_message: req.flash('success_message'), recipes: recipes })
+    },
 
+    logout: async (req, res) => {
 
-        
+        let recipes = []
+
+        recipes = await RecipeModel.find()
+
+        req.flash('success_message', 'Successfully Logged Out.')
+        res.render('index', { success_message: req.flash('success_message'), recipes: recipes })
     },
 
     contact: (req, res) => {
@@ -75,17 +82,18 @@ module.exports = {
         }
        
         let userReq = await UserModel.findOne({user_id: recipeReq.user_id})
+        console.log(userReq)
             if(userReq) {
                 res.render('show', { recipe : recipeReq ,userReq: userReq} )
             } else {
-                res.render('show', { recipe : recipeReq } )
+                res.render('show', { recipe : recipeReq} )
             }
             
     },
 
     create: async (req, res) => {
 
-        const { name, newImage, cuisine, serves, difficulty, time, summary, ingredient, instructions, newTags} = req.body
+        const { name, prepared_by, newImage, cuisine, serves, difficulty, time, summary, ingredient, instructions, newTags} = req.body
 
         //creating an errors array to display all the errors
         let errors = []
@@ -102,6 +110,7 @@ module.exports = {
             res.render('newform', {
                 errors: errors,
                 name: name,
+                prepared_by: prepared_by,
                 image: newImage,
                 cuisine: cuisine,
                 serves: serves,
@@ -135,11 +144,12 @@ module.exports = {
                 updatedTagsArray.push({"tag": tagsArray[i].trim()})
             }
 
-            let newUpload = await cloudinary.uploader.upload(req.file.path);
+           let newUpload = await streamUpload(req)
 
             RecipeModel.create({
 
                 name: name,
+                prepared_by: prepared_by,
                 image: newUpload.secure_url,
                 cloudinary_id: newUpload.public_id,
                 cuisine: cuisine,
@@ -150,6 +160,10 @@ module.exports = {
                 summary: summary,
                 ingredient: newIngredient,            
                 instruction: newInstructions,
+                website: req.user.website,
+                facebook: req.user.facebook,
+                instagram: req.user.instagram,
+                pinterest: req.user.pinterest,
                 tags: updatedTagsArray,
                 created_at: Date.now(),
                 updated_at: Date.now()
@@ -167,13 +181,13 @@ module.exports = {
     },
 
     editPhoto: async (req,res) => {
-
+        
         let updateRecipe = await RecipeModel.findById(req.params.id)
 
         if(updateRecipe.user_id === req.user.user_id) {
 
 
-            let newUpload = await cloudinary.uploader.upload(req.file.path);
+            let newUpload = await streamUpload(req)
             cloudinary.uploader.destroy(updateRecipe.cloudinary_id)
 
             RecipeModel.updateOne(

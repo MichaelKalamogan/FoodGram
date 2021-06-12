@@ -77,25 +77,30 @@
                         <h1 class="show-header align-center">Prepared By</h1>
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="/Images/chef.png" alt="Admin" class="square" width="150">
+                                <img 
+                                <% if(recipe.owner_image && recipe.owner_image !="") { %>
+                                    src="<%=recipe.owner_image%>" 
+                                    <% } else { %>
+                                        src="<%=userReq.image%>"
+                                    <% } %> alt="Admin" class="square" style="width: 90%;">
                                 <div class="mt-3">
-                                    <h4><%=userReq.user_id%></h4>
-                                    <button class="btn btn-primary">Follow</button>
+                                    <h4><%=recipe.prepared_by%></h4>
+                                    <button class="btn btn-primary" style="font-size: 0.8em;">Follow</button>
                                 </div>
                             </div>
                             <div class="social-icons">
                                 <ul>
-                                    <%if (userReq.website) { %>
-                                        <li><a href="<% userReq.website %>"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true" style="color:purple;"></span></a></li>
+                                    <%if (userReq.website || recipe.website) { %>
+                                        <li><a href="<%= recipe.website %>" target="_blank"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true" style="color:purple;"></span></a></li>
                                     <% } %>
-                                    <%if (userReq.facebook) { %>
-                                        <li><a href="<% userReq.facebook %>"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
+                                    <%if (userReq.facebook || recipe.website) { %>
+                                        <li><a href="<%=recipe.facebook %>" target="_blank"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
                                     <% } %>
-                                    <%if (userReq.instagram) { %>
-                                        <li><a href="<% userReq.instagram %>"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
+                                    <%if (userReq.instagram || recipe.website) { %>
+                                        <li><a href="<%=recipe.instagram %>" target="_blank"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
                                     <% } %>
-                                    <%if (userReq.pinterest) { %>
-                                        <li><a href="<% userReq.pinterest %>"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
+                                    <%if (userReq.pinterest || recipe.website) { %>
+                                        <li><a href="<%=recipe.pinterest %>" target="_blank"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
                                     <% } %>
                                 </ul>
                             </div> 

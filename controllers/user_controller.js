@@ -1,12 +1,14 @@
-require('dotenv').config()
 const bcrypt = require('bcryptjs')
 const { UserModel } = require('../models/user')
 const { RecipeModel } = require ('../models/recipe')
 const cloudinary = require('../config/cloudinary-config')
 const multer =  require('multer')
-const streamifier = require('streamifier')
-
+const { streamUpload } = require('../config/multer-config')
+const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer');
 const passport = require('passport')
+const crypto = require('crypto')
+const user = require('../models/user')
 
 
 module.exports = {
@@ -98,7 +100,7 @@ module.exports = {
                         })
                             .then(user => {
                             req.flash('success_message', 'Successfully Registered. Please Login and visit your dashboard to update your profile.')
-                            res.redirect('/user/login')
+                            res.render('login', {success_message: req.flash('success_message')})
                                 
                             })
                     }
@@ -113,6 +115,122 @@ module.exports = {
           failureRedirect: '/user/login',
           failureFlash: true}) (req,res,next)
     },
+
+    //Page to submit email to reset password
+    forgotPassword: (req, res) => {
+        res.render('forgot-password')
+    },
+
+    //Submitting the email details to get the password reset token sent to the user's email address
+    submitForgotPassword: async (req, res, next) => {
+
+        const { email } = req.body
+
+        const resetUser = await UserModel.findOne({email: email})
+
+        if(!resetUser) {
+            req.flash('error_message', 'Email not registered. Please register')
+            res.render('register', {error_message:  req.flash('error_message')})
+
+        } else {
+            let resetToken = process.env.JWT_SECRET + resetUser.password
+            const payload = {
+                email: email,
+                _id: resetUser._id
+            }
+
+            const token = jwt.sign (payload, process.env.JWT_SECRET, {expiresIn: 600000})
+           
+            const link = `http://localhost:3000/reset-password/${resetUser._id}/${token}`
+
+            let transport = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+                }
+            });
+            
+            const message = {
+                from: process.env.EMAIL_ADDRESS, // Sender address
+                to: email ,         //  recipients
+                subject: 'Reset FoodGram Login Password', // Subject line
+                text: link // link to reset
+            };
+ 
+            transport.sendMail(message, function(err, info) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    req.flash('success_message', 'reset password link has been sent to your email')
+                    res.render('login', {success_message: req.flash('success_message')})
+                }
+            })
+            
+
+        }
+
+    },
+
+    resetPassword: async (req,res) => {
+      
+        //let updateUserPass = UserModel.findById(id)
+        //console.log(updateUserPass.password)
+        const {id, token} = req.params
+
+        const resetUser = await UserModel.findOne({_id : id})
+
+        const resetToken = process.env.JWT_SECRET + resetUser.password
+
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+            res.render('reset-password', {user_id : id})
+
+        } catch(error) {
+           console.log(error.message)
+           res.send(error.message)
+        }
+
+    },
+
+    submitResetPassword: async(req,res) => {
+        
+        const {id, password, password2} = req.body
+
+        //creating an errors array to display all the errors
+        let errors = []
+
+        //Hash the password using bcrypt and saltrounds of 10
+        const hash = bcrypt.hashSync(password, 10);
+
+        //ensuring the user knows the password being keyed in
+        if (password !== password2) {
+            errors.push("Passwords don't match.")
+        }
+
+        let passUpdate = await UserModel.updateOne(
+            { _id: id},
+
+            {
+                $set: {
+                    password: hash,
+                    updated_at: Date.now()
+                }
+            }
+
+        )
+
+        if (!passUpdate) {
+            res.send ('failed')
+        } else {
+        req.flash('success_message', 'Password successfully updated')
+        res.render('login', {success_message: req.flash('success_message')})
+        }
+
+
+    },  
+
  
     //log in to user dashboard
     dashboard: async (req, res) => {
@@ -169,7 +287,7 @@ module.exports = {
                 cloudinary.uploader.destroy(req.user.cloudinary_id)
             }
 
-            newUpload = await cloudinary.uploader.upload(req.file.path);
+            newUpload = await streamUpload(req);
 
             await UserModel.updateOne (
                 {user_id: req.user.user_id},
@@ -192,11 +310,10 @@ module.exports = {
         
         let userRecipe = []
     
-        userRecipe= await RecipeModel.findById(req.params.id)
+        userRecipe = await RecipeModel.findById(req.params.id)
     
-            // .then(recipe => {
-                res.render('updateRecipe', {recipe: userRecipe})
-            // })
+        res.render('updateRecipe', {recipe: userRecipe})
+
     },
 
     updateRecipe: async (req, res) => {
@@ -219,18 +336,45 @@ module.exports = {
         for(let i =0; i< tagsArray.length; i++) {
             updatedTagsArray.push({"tag": tagsArray[i].trim()})
         }
+
+        let newUpload
         
+        if(req.file) {
+
+            if(req.user.owner_cloud_id) {
+                cloudinary.uploader.destroy(owner_cloud_id)
+            }
+    
+            newUpload = await streamUpload(req);
+
+            RecipeModel.updateOne(
+                { _id: req.params.id},
+                {
+                    $set: {
+                        owner_image: newUpload.secure_url,
+                        owner_cloud_id: newUpload.public_id,
+                        updated_at: Date.now()
+                    }
+                }
+            )
+        }
+
         RecipeModel.updateOne(
             { _id: req.params.id},
             {
                 $set: {
                     name: req.body.name,
+                    prepared_by: req.body.prepared_by,
                     cuisine: req.body.cuisine,
                     serves: req.body.serves,
                     difficulty: req.body.difficulty,
                     time: req.body.time,
                     summary: req.body.summary,
-                    ingredient: updatedIngredient,            
+                    ingredient: updatedIngredient,
+                    website: req.body.website,
+                    instagram: req.body.instagram,
+                    facebook: req.body.facebook,
+                    pinterest: req.body.pinterest,            
                     instruction: updatedInstructions,
                     tags: updatedTagsArray,
                     updated_at: Date.now()

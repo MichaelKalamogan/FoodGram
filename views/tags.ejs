@@ -43,16 +43,12 @@
                             <% } %>
                             
                             <% if(recipes[i].reviews.length > 0) { %>
-                                <% let reviews = recipes[i].reviews %>
-                                <% let averageReviews = 0 %>
-                                <% reviews = reviews.reduce(function(a, b){ %>
-                                   <% return a + b; %>
-                                <% }, 0) %>
-                                <% averageReviews = sumReviews/reviews.length %>    
-    
-    
-                                <li class="snapshot"><span><%= averageReviews %></span></li>
-                            
+                                <% let ratingSum = 0; %>
+                                <% for (let j = 0; j<recipes[i].reviews.length; j++) { %>
+                                    <% ratingSum += recipes[i].reviews[j].rating %>
+                                <% } %>
+                                <% let averageReviews = ratingSum/recipes[i].reviews.length %>        
+                                <li class="snapshot"><span><%=averageReviews.toFixed(2)%><span class="iconify" data-icon="typcn-star" data-inline="true"></span></span></li>
                             <% } %>
                         </ul>
                         </div>

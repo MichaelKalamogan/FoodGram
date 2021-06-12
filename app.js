@@ -12,6 +12,8 @@ const flash = require('connect-flash');
 const multer = require('multer')
 const passport = require('passport')
 const { upload } = require('./config/multer-config')
+const jwt = require('jsonwebtoken')
+require('express-async-errors');
 
 
 const app = express();
@@ -19,6 +21,7 @@ const port = 3000;
 const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_URL}`
 const { authenticatedOnly, alreadyAuthenticated, verifyUser} = require('./middlewares/auth-middleware');
 const recipe = require('./models/recipe')
+const user = require('./models/user')
 
 require('./config/passport-config')(passport)
 
@@ -59,11 +62,10 @@ app.use((req, res, next) => {
 
 //To flash the appropriate success or error messages
 app.use((req, res, next) => {
-  res.locals.success_message = req.flash('success_message');
-  res.locals.error_message = req.flash('error_message');
+  res.locals.success_message = ""
+  res.locals.error_message = ""
   next();
 });
-
 
 // =======================================
 //              ROUTES
@@ -74,6 +76,9 @@ app.post('/recipes', authenticatedOnly, upload.single("newImage"), recipeControl
 
 // Homepage, accessible to all
 app.get('/recipes/home', recipeController.index)
+
+//Home page after logout
+app.get('/recipes/logout', recipeController.logout)
 
 //Contact page
 app.get('/contact-us', recipeController.contact)
@@ -104,6 +109,18 @@ app.get('/user/register', alreadyAuthenticated, userController.new)
 //Register the new User
 app.post('/user/register', alreadyAuthenticated, userController.create)
 
+//Forgot password page
+app.get('/user/forgot-password', userController.forgotPassword)
+
+//submit email to get reset password link
+app.post('/user/forgot-password', userController.submitForgotPassword)
+
+//Reset password page
+app.get('/reset-password/:id/:token', userController.resetPassword)
+
+//submit new password
+app.patch('/reset-password/submit', userController.submitResetPassword)
+
 //User Dashboard
 app.get('/user/:user_id/dashboard', authenticatedOnly, verifyUser, userController.dashboard)
 
@@ -123,7 +140,7 @@ app.patch('/user/:user_id/dashboard/editprofilephoto', authenticatedOnly, verify
 app.get('/recipe/:user_id/:id/editrecipe', authenticatedOnly, verifyUser, userController.updateRecipeForm)
 
 //Update the recipe
-app.patch('/recipe/:user_id/:id/editrecipe', authenticatedOnly, verifyUser, userController.updateRecipe)
+app.patch('/recipe/:user_id/:id/editrecipe', authenticatedOnly, verifyUser, upload.single("newImage"), userController.updateRecipe)
 
 //change the photo of the recipe
 app.get('/recipe/:user_id/:id/editrecipephoto',authenticatedOnly, verifyUser, recipeController.editPhotoForm)
@@ -138,9 +155,8 @@ app.delete('/user/:user_id/:id/delete', authenticatedOnly, verifyUser, recipeCon
 //Logout
 app.delete('/user/logout', async (req, res) => {
   req.logOut()
-  req.flash('success_message', 'Successfully Logged Out.') //this is not coming out 
-  res.redirect('/recipes/home')
   req.session.destroy()
+  res.redirect('/recipes/logout')
 
 })
 

@@ -8,34 +8,40 @@
         <%- include('./partials/nav') %>
         
          <object data="/Images/FoodGram (1).svg" width="max-width" id="banner"> </object>
-         <%- include('./partials/alerts')%>
+         <% if(success_message && success_message !== "") { %>
+            <div class="alert alert-success d-flex align-items-center" role="alert" style="margin-top: 2em;">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+              <div>
+                <%= success_message %>
+              </div>
+            </div>
+        <% } %>
+        
         <div class="mt-5">
 
             <div class="row" id="index-filter-btns">
                 <div class="btn-group me-2" role="group" aria-label="Second group" id="filter-button">
                     <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Show All</button>
                     <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Chinese</button>
-                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Malay</button>
                     <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Indian</button>
+                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Japanses</button>
                     <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Italian</button>
+                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Mexican</button>
+                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Spanish</button>
+                    <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Middle-Eastern</button>
                     <button type="radio" class="btn btn-secondary index-filter-button" id="all-cuisine-btn">Others</button>
+                    <form method="POST" class="btn btn-secondary" action='/recipes/filter'>
+                        <input type="text" name="searchTagInput" id="searchTagInput" placeholder="search #tags"/>
+                        <button type="submit" id="search-tag"><i class="fa fa-search"></i></button>
+                    </form>
                 </div>
 
-                <div>
-                    <div id="searchWrapper">
-                        <form method="POST" action='/recipes/filter'>
-                            <input type="text" name="searchTagInput" id="searchTagInput" placeholder="search #tags"/>
-                            <button type="submit" id="search-tag"><i class="fa fa-search"></i></button>
-                        </form>
-                        
-                    </div>
-                </div>
             </div>
             
             <div class="row" id="whole-list">
                 <% for(let i=0; i < recipes.length; i++) { %>
 
-                    <div class="card index-card <%=recipes[i].cuisine%>" style="width: 24rem; height: 40%;">
+                    <div class="card index-card <%=recipes[i].cuisine%>  h-200" style="width: 24rem;">
                         <h4 class="card-title mt-3 mb-3 text-center"><%=recipes[i].name%></h4>
                         <div class="embed-responsive">
                             <img src="<%=recipes[i].image%>" class="card-img-top" alt="..." style="max-height: 50vh;">
@@ -63,8 +69,8 @@
                         </ul>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                            <p class="card-text"><%= recipes[i].summary %></p>
+                            <div class="row index-recipe-summary">
+                            <p class="card-text index-recipe-summary"><%= recipes[i].summary %></p>
                             </div>                        
                             <div class="row mb-2 mt-3">
                             <% let indexTags = '' %>
