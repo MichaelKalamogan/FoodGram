@@ -160,7 +160,7 @@ module.exports = {
             };
  
             transport.sendMail(message, function(err, info) {
-                if (err) {
+                if (err) {c
                     console.log(err)
                 } else {
                     req.flash('success_message', 'Reset password link has been sent to your email')
