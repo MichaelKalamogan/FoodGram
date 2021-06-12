@@ -267,7 +267,7 @@ module.exports = {
             }
         )
         
-        res.redirect('/user/:user_id/dashboard/')
+        res.redirect(`/user/${req.user.user_id}/dashboard/`)
     },
 
     // Render the page for updating the user photo
@@ -300,7 +300,7 @@ module.exports = {
             )   
         }
 
-        res.redirect('/user/:user_id/dashboard/')
+        res.redirect(`/user/${req.user.user_id}/dashboard/`)
 
     },
 
@@ -346,8 +346,9 @@ module.exports = {
             }
     
             newUpload = await streamUpload(req);
+            console.log('1: ' + newUpload)
 
-            RecipeModel.updateOne(
+            let updated = await RecipeModel.updateOne(
                 { _id: req.params.id},
                 {
                     $set: {
@@ -357,7 +358,11 @@ module.exports = {
                     }
                 }
             )
+
+            console.log('2' + updated)
         }
+
+
 
         RecipeModel.updateOne(
             { _id: req.params.id},

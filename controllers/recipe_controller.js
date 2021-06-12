@@ -18,9 +18,12 @@ module.exports = {
         if(!req.user) {
             
             req.flash('success_message', 'Log In to upload your own recipe, give ratings and receive comments on your own recipes! ')
-        } 
+            res.render('index', { success_message: req.flash('success_message'), recipes: recipes })
+        } else {
+            res.render('index', { recipes: recipes })
+        }
 
-        res.render('index', { success_message: req.flash('success_message'), recipes: recipes })
+        
     },
 
     logout: async (req, res) => {
