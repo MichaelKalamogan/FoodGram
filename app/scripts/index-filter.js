@@ -23,7 +23,7 @@ window.onload = () =>{
                 array2[i].style.display= ''
             }
         } else {
-            array1 =  document.getElementsByClassName(str)
+            array1 = document.getElementsByClassName(str)
             for(let i = 0; i< array2.length; i++) {
                 array2[i].style.display= 'none'
             }
