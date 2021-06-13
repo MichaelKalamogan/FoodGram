@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 const passport = require('passport')
 const crypto = require('crypto')
 const user = require('../models/user')
+const port = process.env.PORT || 3000;
 
 
 module.exports = {
@@ -141,7 +142,7 @@ module.exports = {
 
             const token = jwt.sign (payload, process.env.JWT_SECRET, {expiresIn: 600000})
            
-            const link = `http://localhost:3000/reset-password/${resetUser._id}/${token}`
+            const link = `http://localhost:${port}/reset-password/${resetUser._id}/${token}`
 
             let transport = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
