@@ -72,6 +72,8 @@ app.use((req, res, next) => {
 //              ROUTES
 // =======================================
 
+app.get('/', (req, res) => { res.redirect('/recipes/home')})
+
 // create a new recipe
 app.post('/recipes', authenticatedOnly, upload.single("newImage"), recipeController.create)
 
