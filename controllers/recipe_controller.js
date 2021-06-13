@@ -1,6 +1,5 @@
 const { RecipeModel } = require ('../models/recipe')
 const { UserModel } = require('../models/user')
-const { FeedbackModel } = require('../models/feedback')
 const cloudinary = require('../config/cloudinary-config')
 const multer =  require('multer')
 const streamifier = require('streamifier')
