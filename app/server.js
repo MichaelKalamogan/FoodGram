@@ -1,7 +1,7 @@
 // =======================================
 //              DEPENDENCIES
 // =======================================
-// require('dotenv').config()
+require('dotenv').config()
 const express =  require('express')
 const mongoose = require('mongoose')
 const session = require('express-session')
@@ -28,6 +28,7 @@ require('./config/passport-config')(passport)
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 app.set('view engine', 'ejs')
+app.set('views', __dirname + '/views');
 
 // =======================================
 //              MIDDLEWARES
