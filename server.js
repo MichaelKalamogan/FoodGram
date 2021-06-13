@@ -28,7 +28,7 @@ require('./config/passport-config')(passport)
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 app.set('view engine', 'ejs')
-app.set('views', __dirname + '/views');
+
 
 // =======================================
 //              MIDDLEWARES

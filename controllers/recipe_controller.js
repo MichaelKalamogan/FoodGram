@@ -5,6 +5,7 @@ const cloudinary = require('../config/cloudinary-config')
 const multer =  require('multer')
 const streamifier = require('streamifier')
 const { streamUpload } = require('../config/multer-config')
+const nodemailer = require('nodemailer');
 
 
 module.exports = {
@@ -45,15 +46,33 @@ module.exports = {
 
         if(!name || !email) {
             await req.flash('error_message', 'Both Name and email address must be filled up')
-            res.render('contact-us', {name: name, email: email, comments: comments})
+            res.render('contact-us', {name: name, email: email, comments: comments, error_message: req.flash('error_message') })
         } else {
-            FeedbackModel.create ({
-                name: name,
-                email: email,
-                comments: comments
-            })
-            .then(createResp =>{        
-                res.redirect('/recipes/home')
+
+            let transport = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASS
+                }
+            });
+            
+            const message = {
+                from: process.env.EMAIL_ADDRESS, // User's email address
+                to: process.env.EMAIL_ADDRESS,         //  my email
+                subject: "Feedback From User", // Subject line
+                text: `From: ${name}. Email: ${email}. Feedback: ${comments}` // Actual feedback from user
+            };
+ 
+            transport.sendMail(message, function(err, info) {
+                if (err) {
+                    console.log(err)
+                    res.send('failed. Please retry')
+                } else {
+                    req.flash('success_message', 'Thank you for your feedback. We will get back to you. In the meantime')
+                    res.redirect('/recipes/home')      
+                }
             })
         }
     },
