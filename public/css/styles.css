@@ -141,7 +141,27 @@ div.edit-recipe{
     margin-bottom: 40px;
 }
 
-.index-recipe-summary {
-    overflow: scroll;
+
+#mobile-filter {
+    display:none;
+}
+
+@media screen and (max-width: 1024px){
+
+    #banner {
+        margin-top: 6em;
+    }
+
+    #filter-button {
+        display:none;
+    }
+
+    #mobile-filter {
+        display:block;
+    }
+
+    .alert {
+        margin-top: 0.6em;
+    }
 
 }

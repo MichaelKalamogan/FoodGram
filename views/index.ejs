@@ -6,8 +6,10 @@
     <body>
 
         <%- include('./partials/nav') %>
+        <div style="height: fit-content;" id="banner">
+            <object data="/Images/FoodGram (1).svg" style="width:100vw;" > </object>
+        </div>
         
-         <object data="/Images/FoodGram (1).svg" width="max-width" id="banner"> </object>
          <% if(success_message && success_message !== "") { %>
             <div class="alert alert-success d-flex align-items-center" role="alert" style="margin-top: 2em;">
               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
@@ -17,7 +19,7 @@
             </div>
         <% } %>
         
-        <div class="mt-5">
+        <div class="mt-2">
 
             <div class="row" id="index-filter-btns">
                 <div class="btn-group me-2" role="group" aria-label="Second group" id="filter-button">
@@ -35,6 +37,18 @@
                         <button type="submit" id="search-tag"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
+
+                <select id="mobile-filter"> 
+                    <option class="select-options" value="show all" selected="selected">Filter Cuisine</option> 
+                    <option class="select-options" value="chinese">Chinese</option> 
+                    <option class="select-options" value="Indian">Indian</option> 
+                    <option class="select-options" value="japanese">Japanese</option> 
+                    <option class="select-options" value="italian">Italian</option> 
+                    <option class="select-options" value="mexican">Mexican</option> 
+                    <option class="select-options" value="spanish">Spanish</option> 
+                    <option class="select-options" value="middle-eastern">Middle-Eastern</option>
+                    <option class="select-options" value="others">Others</option> 
+                  </select> 
 
             </div>
             
@@ -70,7 +84,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row index-recipe-summary">
-                            <p class="card-text index-recipe-summary"><%= recipes[i].summary %></p>
+                            <p class="card-text index-recipe-summary" style="text-align: justify;"><%= recipes[i].summary %></p>
                             </div>                        
                             <div class="row mb-2 mt-3">
                             <% let indexTags = '' %>

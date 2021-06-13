@@ -5,13 +5,18 @@ window.onload = () =>{
     let buttonArray = document.getElementsByClassName('index-filter-button')
     
     for(let i = 0; i < buttonArray.length; i++) {
-        
         buttonArray[i].addEventListener("click", function () {
             let cuisine = buttonArray[i].innerHTML.toLowerCase()
             filterSelection(cuisine)
         })
     }
-   
+
+    let selectFilter = document.getElementById('mobile-filter')
+    selectFilter.addEventListener('change', () => {
+
+        let cuisine =  selectFilter.value
+        filterSelection(cuisine)
+    })
 
     function filterSelection (str) {
     
@@ -32,9 +37,6 @@ window.onload = () =>{
                 array1[i].style.display= ''
             }    
         }
-
-        
-
     }
 
 }
