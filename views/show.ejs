@@ -11,12 +11,12 @@
             <div class="col-md-8 ">
 
                 <div class="row">
-                    <div class="row">
-                        <h1 id="main-name" style="margin-bottom: 20px;"><%=recipe.name%></h1>
+                    <div class="row" id="main-name">
+                        <h1 style="margin-bottom: 20px;"><%=recipe.name%></h1>
                     </div>
                     <div class="row" id="show-header-container">
     
-                        <div class="ms-10" id="show-image-container">
+                        <div class="row" id="show-image-container">
                             <img src="<%=recipe.image%>" alt=".." class="show-image"/>
                             
                             <div class="row show-image">                        
@@ -49,16 +49,16 @@
                 <div class="row" id="ingredient-instructions">
                     <div class="col-md-4" style="padding: 0;">
                         <h2 class="show-header mb-3">Ingredients List</h2>
-                        <ul style="padding: 0; text-align: justify;">
+                        <ul style="padding: 0;">
                             <%for(let i=0; i < recipe.ingredient.length; i++) { %>
                                 <li style="list-style: none; margin-bottom: 10px;"><%= recipe.ingredient[i].item %></li>
                             <% } %>
                             </ul>
                     </div>
             
-                    <div class="col-md-4" style="margin-left:80px; padding: 0;">
+                    <div class="col-md-4" id="cooking-instructions">
                         <h2 class="show-header mb-3">Cooking Instructions</h2>
-                        <ol style="padding: 0; text-align: justify;">
+                        <ol>
                         <%for(let j=0; j < recipe.instruction.length; j++) { %>
                              <li style="margin-bottom: 30px;"><%= recipe.instruction[j].toDo %></li>
                         <% } %>
@@ -85,7 +85,6 @@
                                     <% } %> alt="Admin" class="square" style="width: 90%;">
                                 <div class="mt-3">
                                     <h4><%=recipe.prepared_by%></h4>
-                                    <button class="btn btn-primary" style="font-size: 0.8em;">Follow</button>
                                 </div>
                             </div>
                             <div class="social-icons">
