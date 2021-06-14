@@ -164,6 +164,10 @@ div.edit-recipe{
         margin: 0;
     }
 
+    #nav-bar, .logout-bar{
+        font-size: 0.9em;
+    }
+
     .after-navbar {
         margin: 8em 0 0 0;
         justify-content: center;
