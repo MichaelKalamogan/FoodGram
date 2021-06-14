@@ -1,6 +1,7 @@
 body {
  background-color: white;
  font-family: Arvo, serif;
+ width: 100%;
 }
 
 .alert {
@@ -144,6 +145,20 @@ div.edit-recipe{
     padding: 0;
     border: 4px double lightblue;
     margin-bottom: 40px;
+}
+
+footer {
+    background-color: lightslategrey;
+    padding: 30px
+}
+
+footer p {
+    text-align: center;
+    color: white;
+}
+
+#banner {
+    width:100%;
 }
 
 
