@@ -90,16 +90,36 @@
                             <div class="social-icons">
                                 <ul>
                                     <%if (userReq.website || recipe.website) { %>
-                                        <li><a href="<%= recipe.website %>" target="_blank"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true" style="color:purple;"></span></a></li>
+                                        <li><a 
+                                            <%if(recipe.website.startsWith('https://') || recipe.website.startsWith('http://')) { %>
+                                            href="<%=recipe.website%>"
+                                        <%} else { %>
+                                            href="https://<%=recipe.website%>" 
+                                        <% } %> target="_blank"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true" style="color:purple;"></span></a></li>
                                     <% } %>
-                                    <%if (userReq.facebook || recipe.website) { %>
-                                        <li><a href="<%=recipe.facebook %>" target="_blank"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
+                                    <%if (userReq.facebook || recipe.facebook) { %>
+                                        <li><a 
+                                            <%if(recipe.facebook.startsWith('https://') || recipe.facebook .startsWith('http://')) { %>
+                                                href="<%=recipe.facebook %>"
+                                            <%} else { %>
+                                                href="https://<%=recipe.facebook %>" 
+                                            <% } %> target="_blank"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
                                     <% } %>
-                                    <%if (userReq.instagram || recipe.website) { %>
-                                        <li><a href="<%=recipe.instagram %>" target="_blank"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
+                                    <%if (userReq.instagram || recipe.instagram) { %>
+                                        <li><a 
+                                            <%if(recipe.instagram.startsWith('https://') || recipe.instagram.startsWith('http://')) { %>
+                                                href="<%=recipe.instagram%>"
+                                            <%} else { %>
+                                                href="https://<%=recipe.instagram%>" 
+                                            <% } %> target="_blank"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
                                     <% } %>
-                                    <%if (userReq.pinterest || recipe.website) { %>
-                                        <li><a href="<%=recipe.pinterest %>" target="_blank"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
+                                    <%if (userReq.pinterest || recipe.pinterest) { %>
+                                        <li><a 
+                                            <%if(recipe.pinterest.startsWith('https://') || recipe.pinterest.startsWith('http://')) { %>
+                                                href="<%=recipe.instagram%>"
+                                            <%} else { %>
+                                                href="https://<%=recipe.pinterest%>" 
+                                            <% } %> target="_blank"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
                                     <% } %>
                                 </ul>
                             </div> 
