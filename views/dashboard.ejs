@@ -25,28 +25,36 @@
                             <div class="social-icons">
                                 <ul>
                                     <li><a 
-                                        <%if(user.website.startsWith('https://') || user.website.startsWith('http://')) { %>
-                                            href="<%=user.website%>"
-                                        <%} else { %>
-                                            href="https://<%=user.website%>" 
+                                        <%if (user.website) { %>
+                                            <%if(user.website.startsWith('https://') || user.website.startsWith('http://')) { %>
+                                                href="<%=user.website%>"
+                                            <%} else { %>
+                                                href="https://<%=user.website%>" 
+                                            <% } %> 
                                         <% } %> target="_blank"><span class="iconify" data-icon="dashicons:admin-site-alt" data-inline="true"></span></a></li>
                                     <li><a
-                                        <%if(user.facebook.startsWith('https://') || user.facebook.startsWith('http://')) { %>
-                                            href="<%=user.facebook%>"
-                                        <%} else { %>
-                                            href="https://<%=user.facebook%>" 
+                                        <%if (user.facebook) { %>
+                                            <%if(user.facebook.startsWith('https://') || user.facebook.startsWith('http://')) { %>
+                                                href="<%=user.facebook%>"
+                                            <%} else { %>
+                                                href="https://<%=user.facebook%>" 
+                                            <% } %> 
                                         <% } %> target="_blank"><span class="iconify" data-icon="bx:bxl-facebook" data-inline="true" style="color:#4267B2"></span></a></li>
-                                    <li><a 
-                                        <%if(user.instagram.startsWith('https://') || user.instagram.startsWith('http://')) { %>
-                                            href="<%=user.instagram%>"
-                                        <%} else { %>
-                                            href="https://<%=user.instagram%>" 
+                                    <li><a
+                                        <%if (user.instagram) { %> 
+                                            <%if(user.instagram.startsWith('https://') || user.instagram.startsWith('http://')) { %>
+                                                href="<%=user.instagram%>"
+                                            <%} else { %>
+                                                href="https://<%=user.instagram%>" 
+                                            <% } %> 
                                         <% } %> target="_blank"><span class="iconify" data-icon="bx:bxl-instagram" data-inline="true" style="color:black"></span></a></li>
                                     <li><a 
-                                        <%if(user.pinterest.startsWith('https://') || user.pinterest.startsWith('http://')) { %>
-                                            href="<%=user.pinterest%>"
-                                        <%} else { %>
-                                            href="https://<%=user.pinterest%>" 
+                                        <%if (user.pinterest) { %>
+                                            <%if(user.pinterest.startsWith('https://') || user.pinterest.startsWith('http://')) { %>
+                                                href="<%=user.pinterest%>"
+                                            <%} else { %>
+                                                href="https://<%=user.pinterest%>" 
+                                            <% } %> 
                                         <% } %> target="_blank"><span class="iconify" data-icon="bx:bxl-pinterest" data-inline="true" style="color:#E60023"></span></a></li>
                                 </ul>
                             </div> 
