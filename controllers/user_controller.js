@@ -142,7 +142,7 @@ module.exports = {
 
             const token = jwt.sign (payload, process.env.JWT_SECRET, {expiresIn: 600000})
            
-            const link = `http://localhost:${port}/reset-password/${resetUser._id}/${token}`
+            const link = `http://foodgramltd.herokuapp.com/reset-password/${resetUser._id}/${token}`
 
             let transport = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
