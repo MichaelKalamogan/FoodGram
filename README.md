@@ -1,12 +1,13 @@
 # FoodGramltd
 
-Simple recipe site that connects to a backend database. 
-* Built as part of a project for my software engineering course.
+The intent of the site is for people, who have run out of ideas on what to cook, to draw inspiration from some of the recipes.
+* Based on the difficulty and the number of pax it serves, they can just choose after filtering according to the cuisine they prefer.
+* As more reviews are provided, it also provides an avenue for good homecooks to showcase their talents.
 
+* Built as part of a project for my software engineering course.
 * Can be accessed at the following url:  https://foodgramltd.herokuapp.com/recipes/home
     
 ## Details of App
-
 * Registered users are able to log in and upload their homemade recipes.
     * These recipes can be reviwed by other registered users
     * The final intent is to showcase really good recipes as well as the person who created it. Provides a platform for homecooks to showcase their talent.
@@ -75,6 +76,8 @@ Authentication is done by using localstrategy of Passport authentication middlew
 Images are uploaded to cloudinary using multer and streamify, so as to minimise any local disk storage: https://cloudinary.com/blog/node_js_file_upload_to_a_local_server_or_to_the_cloud
 * A cloundinary id was included in user and recipe schemas to faciliate the deletion of previous images whenever there is an update to the image or the recipe is deleted.
 
+#### Suggestions and Improvements
+Will appreciate any suggestions and improvements to the code, layout, user interface or even the basic idea itself. Thank you. 
 
 # Credits
 
