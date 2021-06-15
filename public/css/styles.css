@@ -151,7 +151,7 @@ footer {
     background-color: lightslategrey;
     width: 100%;
     bottom:0;
-    position: fixed;
+    position: relative;
     font-size: 0.6em;
     height: fit-content;
 }
