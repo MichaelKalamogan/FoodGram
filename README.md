@@ -15,12 +15,15 @@ The intent of the site is for people, who have run out of ideas on what to cook,
     * The final intent is to showcase really good recipes as well as the person who created it. Provides a platform for homecooks to showcase their talent.
 
 * All visitors to the site will be able to view all the recipes. Clicking on a specific recipe will show the full details of the recipe, the reviews and the details of the person who posted it.
+
     ![Image of fullrecipe](https://github.com/MichaelKalamogan/foodgramltd/blob/main/public/Images/showfullrecipe.png)
 
 * Can filter them according to cuisine and tags.  
+
     ![Image of filter](https://github.com/MichaelKalamogan/foodgramltd/blob/main/public/Images/filter.png)
 
 * However, non-registered users will not be able to submit a review or upload their own recipes.
+
     ![Image of loginalert](https://github.com/MichaelKalamogan/foodgramltd/blob/main/public/Images/login.png)
 
 
@@ -61,12 +64,15 @@ Mongoose is used to manage the data between MongodDB and Node.js.
     * There are four partials that have been created to be applied in all the pages
         * head.ejs (which has all the common starting html syntax)
         * nav.ejs (the navigation bar for all the pages)
+
         ![Image of Navigation Bar](https://github.com/MichaelKalamogan/foodgramltd/blob/main/public/Images/navigation.png)
 
         * footer.ejs (to be applied at the base of every page)
+
         ![Image of Footer](https://github.com/MichaelKalamogan/foodgramltd/blob/main/public/Images/footer.png)
 
         * alerts.ejs (for req.flash messages)
+
         ![Image of an Alert](https://github.com/MichaelKalamogan/foodgramltd/blob/main/public/Images/alert.png)
 
 * There are three scripts in the scripts folder
