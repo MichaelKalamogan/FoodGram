@@ -6,8 +6,10 @@ The intent of the site is for people, who have run out of ideas on what to cook,
 
 * Built as part of a project for my software engineering course.
 * Can be accessed at the following url:  https://foodgramltd.herokuapp.com/recipes/home
+
+![Image of homepage](/Images/Homepage.png)
     
-## Details of App
+## App Features
 * Registered users are able to log in and upload their homemade recipes.
     * These recipes can be reviwed by other registered users
     * The final intent is to showcase really good recipes as well as the person who created it. Provides a platform for homecooks to showcase their talent.
@@ -33,7 +35,7 @@ The intent of the site is for people, who have run out of ideas on what to cook,
 
 #### Layout of website
 * Bootstap frameworks were used to complement my css.
-* The website was made to be mobile friendly by having a separate segment "@media screen and (max-width: 1024px)" in the css.
+* The website was made to be mobile friendly by having a separate segment "@media screen" in the css.
 
 #### Backend Database
 The app uses a noSql database, MongoDB. 
@@ -61,7 +63,7 @@ Mongoose is used to manage the data between MongodDB and Node.js.
     * new-recipe.js (for newform.ejs) does the adding and deletion of rows when users are uploading their new recipe
     * update-recipe.js (for updateRecipe.ejs) does the adding and deletion of rows when users are updating their recipe
 
-* The css is in the public folder. It is accessed by server.js in line 47 - "app.use(express.static(__dirname + '/public'))"
+* The css is in the public folder. It is accessed by server.js - "app.use(express.static(__dirname + '/public'))"
 
 * The two schema models are in the models folder
 
@@ -74,7 +76,7 @@ Authentication is done by using localstrategy of Passport authentication middlew
 
 #### Uploading of files
 Images are uploaded to cloudinary using multer and streamify, so as to minimise any local disk storage: https://cloudinary.com/blog/node_js_file_upload_to_a_local_server_or_to_the_cloud
-* A cloundinary id was included in user and recipe schemas to faciliate the deletion of previous images whenever there is an update to the image or the recipe is deleted.
+* A cloudinary id was included in user and recipe schemas to faciliate the deletion of previous images whenever there is an update to the image or the recipe is deleted.
 
 # Suggestions and Improvements
 Will appreciate any suggestions and improvements to the code, layout, user interface or even the basic idea itself. Thank you. 
@@ -88,7 +90,7 @@ To start the site, recipes were taken from the following sites:
 * https://www.bbcgoodfood.com/recipes/stir-fried-beef-oyster-sauce
 * https://www.bbcgoodfood.com/recipes/sea-bass-sizzled-ginger-chilli-spring-onions
 * https://www.bbcgoodfood.com/recipes/crisp-chinese-pork
-* https://www.bbcgoodfood.com/recipes/ginger-sweet-tofu-pak-choi
+clou* https://www.bbcgoodfood.com/recipes/ginger-sweet-tofu-pak-choi
 * https://www.recipetineats.com/nagi-recipetin-eats/
 * https://www.feastingathome.com/chilaquiles
 * https://www.feastingathome.com/nachos-recipe/
