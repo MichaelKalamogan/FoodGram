@@ -76,7 +76,7 @@ Authentication is done by using localstrategy of Passport authentication middlew
 Images are uploaded to cloudinary using multer and streamify, so as to minimise any local disk storage: https://cloudinary.com/blog/node_js_file_upload_to_a_local_server_or_to_the_cloud
 * A cloundinary id was included in user and recipe schemas to faciliate the deletion of previous images whenever there is an update to the image or the recipe is deleted.
 
-#### Suggestions and Improvements
+# Suggestions and Improvements
 Will appreciate any suggestions and improvements to the code, layout, user interface or even the basic idea itself. Thank you. 
 
 # Credits
