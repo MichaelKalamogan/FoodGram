@@ -62,7 +62,7 @@
                         </div>
                         <div class="card-header p-0 m-auto" style="height: fit-content;">
                           <ul class="snapshot" style="margin: 10px 0 0 0">
-                            <li class="snapshot" style="margin:0 12px 0 12px;"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipes[i].serves%> </span></li>
+                            <li class="snapshot" style="margin:0 12px 0 0;"><span class="iconify" data-icon="bx:bxs-user" data-inline="true"></span><span><%=recipes[i].serves%> </span></li>
                             <li class="snapshot" style="margin:0 12px 0 12px;"><span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="true"></span><span><%=recipes[i].time%></span></li>
                             <% if(recipes[i].difficulty === 'Easy') { %>
                             <li class="snapshot" style="margin:0 12px 0 12px;"><span class="iconify" data-icon="mdi:signal-cellular-1" data-inline="true"></span><span><%=recipes[i].difficulty%></span></li>
@@ -78,7 +78,7 @@
                                     <% ratingSum += recipes[i].reviews[j].rating %>
                                 <% } %>
                                 <% let averageReviews = ratingSum/recipes[i].reviews.length %>        
-                                <li class="snapshot" style="margin:0 12px 0 12px;"><span><%=averageReviews.toFixed(2)%><span class="iconify" data-icon="typcn-star" data-inline="true"></span></span></li>
+                                <li class="snapshot"><span><%=averageReviews.toFixed(2)%><span class="iconify" data-icon="typcn-star" data-inline="true"></span></span></li>
                             <% } %>
                         </ul>
                         </div>
