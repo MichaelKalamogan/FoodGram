@@ -149,12 +149,17 @@ div.edit-recipe{
 
 footer {
     background-color: lightslategrey;
-    padding: 30px
+    width: 100%;
+    bottom:0;
+    position: fixed;
+    font-size: 0.6em;
+    height: fit-content;
 }
 
 footer p {
     text-align: center;
     color: white;
+    margin:0;
 }
 
 #banner {
