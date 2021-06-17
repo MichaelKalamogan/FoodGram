@@ -107,7 +107,7 @@ To start the site, recipes were taken from the following sites:
 * https://www.bbcgoodfood.com/recipes/stir-fried-beef-oyster-sauce
 * https://www.bbcgoodfood.com/recipes/sea-bass-sizzled-ginger-chilli-spring-onions
 * https://www.bbcgoodfood.com/recipes/crisp-chinese-pork
-clou* https://www.bbcgoodfood.com/recipes/ginger-sweet-tofu-pak-choi
+* https://www.bbcgoodfood.com/recipes/ginger-sweet-tofu-pak-choi
 * https://www.recipetineats.com/nagi-recipetin-eats/
 * https://www.feastingathome.com/chilaquiles
 * https://www.feastingathome.com/nachos-recipe/
