@@ -1,5 +1,6 @@
 window.onload = () =>{
     
+    //Show all the recipes when page loads
     filterSelection('show all')
 
     let buttonArray = document.getElementsByClassName('index-filter-button')
@@ -18,6 +19,7 @@ window.onload = () =>{
         filterSelection(cuisine)
     })
 
+    //Function to filter according to the cuisine string
     function filterSelection (str) {
     
         let array1 = [];
