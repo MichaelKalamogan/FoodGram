@@ -88,7 +88,7 @@ Mongoose is used to manage the data between MongodDB and Node.js.
 
 * The config files for cloudinary. passport and multer are in the config folder.
 
-###### Contact-US
+###### Contact-Us
 * nodemailer was used for the contact page. Sends a mail to foodgramltd@gmail.com with the comment/message
 
 #### Authentication
