@@ -7,7 +7,7 @@ The intent of the site is for people, who have run out of ideas on what to cook,
 * Built as part of a project for my software engineering course.
 * Can be accessed at the following url:  https://foodgramltd.herokuapp.com/recipes/home
 
-![Image of homepage](https://github.com/MichaelKalamogan/foodgramltd/blob/main/public/Images/Homepage.png)
+![Image of homepage](https://github.com/MichaelKalamogan/foodgramltd/blob/main/public/Images/FoodGramHomepage.png)
     
 ## App Features
 * Registered users are able to log in and upload their homemade recipes.
