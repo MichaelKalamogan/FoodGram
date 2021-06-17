@@ -88,6 +88,8 @@ Mongoose is used to manage the data between MongodDB and Node.js.
 
 * The config files for cloudinary. passport and multer are in the config folder.
 
+* nodemailer was used for the contact page. 
+
 #### Authentication
 Authentication is done by using localstrategy of Passport authentication middleware : http://www.passportjs.org/packages/passport-local/
 
