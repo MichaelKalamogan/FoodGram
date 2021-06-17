@@ -88,10 +88,13 @@ Mongoose is used to manage the data between MongodDB and Node.js.
 
 * The config files for cloudinary. passport and multer are in the config folder.
 
-* nodemailer was used for the contact page. 
+###### Contact-US
+* nodemailer was used for the contact page. Sends a mail to foodgramltd@gmail.com with the comment/message
 
 #### Authentication
 Authentication is done by using localstrategy of Passport authentication middleware : http://www.passportjs.org/packages/passport-local/
+
+* Jsonwebtoken was used for resetting of password. Sends a mail to the user with a unique link valid for 10 minutes.
 
 #### Uploading of files
 Images are uploaded to cloudinary using multer and streamify, so as to minimise any local disk storage: https://cloudinary.com/blog/node_js_file_upload_to_a_local_server_or_to_the_cloud
