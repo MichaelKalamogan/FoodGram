@@ -8,7 +8,7 @@
     <%- include('./partials/nav') %>
 
     <div class="after-navbar">
-        <form method="POST" action="/recipe/<%=user.user_id%>/<%=recipe._id%>/editrecipe?_method=PATCH" enctype="multipart/form-data">
+        <form method="POST" action="/recipes/<%=user.user_id%>/<%=recipe._id%>/editrecipe?_method=PATCH" enctype="multipart/form-data">
 
             <div class="col-md-8">
                 <div class="card mb-3">

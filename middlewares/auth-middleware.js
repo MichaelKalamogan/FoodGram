@@ -34,6 +34,12 @@ module.exports = {
             res.redirect('/user/login', {error_message: req.flash('error_message')})
         }
 
+    },
+
+    logoutUser: async (req, res, next) => {
+        req.logOut()
+
+        return next()
     }
 
 }

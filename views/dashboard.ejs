@@ -163,11 +163,11 @@
                         <p class="card-text mt-3"><%= userRecipes[i].name %></p>
                         <img src="<%= userRecipes[i].image%>" class="card-img-top" alt="Picture of the Dish">
                         <div class="card-body">
-                        <a  href="/recipe/<%= user.user_id%>/<%= userRecipes[i]._id%>/editrecipephoto"><button class="btn btn-outline-secondary btn-sm" type="button">Change Picture</button></a>
+                        <a  href="/recipes/<%= user.user_id%>/<%= userRecipes[i]._id%>/editrecipephoto"><button class="btn btn-outline-secondary btn-sm" type="button">Change Picture</button></a>
                         </div>
                         <div class="row">
                             <div class="d-grid gap-2 d-md-flex justify-content-center">
-                                <a  href="/recipe/<%= user.user_id%>/<%= userRecipes[i]._id%>/editrecipe"><button class="btn btn-primary btn-sm me-md-2" type="button">Edit Recipe</button></a>
+                                <a  href="/recipes/<%= user.user_id%>/<%= userRecipes[i]._id%>/editrecipe"><button class="btn btn-primary btn-sm me-md-2" type="button">Edit Recipe</button></a>
                                 <form method="post" action="/user/<%=user.user_id%>/<%= userRecipes[i]._id%>/delete?_method=DELETE"> 
                                     <a onclick="return confirm('Are you sure you want to delete this item?');"><button class="btn btn-primary btn-sm" type="submit">Delete Recipe</button></a>
                                 </form>
