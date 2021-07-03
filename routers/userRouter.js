@@ -27,6 +27,9 @@ router.get('/forgot-password', userController.forgotPassword)
 //submit email to get reset password link
 router.post('/forgot-password', userController.submitForgotPassword)
 
+//Reset Password Page
+router.get('/reset-password/:id/:token', userController.resetPassword)
+
 //User Dashboard
 router.get('/:user_id/dashboard', authenticatedOnly, verifyUser, userController.dashboard)
 

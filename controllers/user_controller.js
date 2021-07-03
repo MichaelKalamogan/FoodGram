@@ -145,7 +145,7 @@ module.exports = {
                 _id: resetUser._id
             }
 
-            const token = jwt.sign (payload, process.env.JWT_SECRET, {expiresIn: 600000})
+            const token = jwt.sign (payload, resetToken, {expiresIn: 600000})
            
             const link = `http://foodgramltd.herokuapp.com/reset-password/${resetUser._id}/${token}`
 
@@ -180,15 +180,16 @@ module.exports = {
     },
 
     resetPassword: async (req,res) => {
-      
+        console.log('working')
         const {id, token} = req.params
-
+        console.log(`token: ${token}`)
         const resetUser = await UserModel.findOne({_id : id})
 
         const resetToken = process.env.JWT_SECRET + resetUser.password
+        console.log(`resettoken: ${resetToken}`)
 
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+            const decoded = jwt.verify(token, resetToken)
             res.render('reset-password', {user_id : id})
 
         } catch(error) {

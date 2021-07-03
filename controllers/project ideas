@@ -1,0 +1,53 @@
+Consultancy platform
+	-so many consultants around but there is no one stop platform to search for them
+	-split them by specialisations, geographical regions
+	-each consultant can have a page showcasing projects, credentials, reviews, contact details
+
+	- Backend:
+		- consultants - name, region they are from, industry, details of staff, past projects and achievements, reviews
+		- users - name, industry,
+
+	- Front-end:
+		- One Log in page for consultants
+		- One Log in page for users
+		- Home page to explain what the site is about
+		- Page to filter the consultants
+		- show page for the individual consultants
+
+
+
+Travel site. something like carousell for travellers to buy things for others as they travel
+	- After covid restrictions are lifted, not everyone can travel
+	- but everyone wants something from another country. example like japanese food.
+	- so you can have a site where people who wants something can list an advert saying 1)which country, state and what item; then they see if anyone takes up their offer
+	- at the same time, people who are going to a certain region/country, can also put up an advert saying when they are going and where
+	- can further develop to have a offer page where they can decide on the price
+	
+	- Backend:
+		- users database: name, country, reviews, how many past transactions
+		- Offers waiting to be accepted
+
+	- Frontend:
+		- Log in page
+		- homepage to randomly show people travelling and where, maybe can show random requests that havent been accepted
+		- show page to show individual users profile, where they usually travel to bla bla bla
+		- Accept offer
+
+
+
+Server/website to check the number of people in office
+	- with all the covid restrictions and the number of people supposed to be in an office
+	- could have a site where the company could set the maximum number of people in the office at any one time. Also detail the number of people to be in specific departments at any one time
+	- Then users can log in to say they are in office and it will work towards the quota
+	- when the number of users reach the maximum, it can send an alert to the administrator, either through email or sms
+	- But this project seems abit too simple to me. I am not very sure how to make the front end look attractive. 
+
+	- Backend:
+		- Users database
+		- Company details  of the various departments
+		- The max number of pax in each dept on any day. To be updated daily
+
+	- Frontend:
+		- Log in page for administrators
+		- log in page for users
+		- show page for user details
