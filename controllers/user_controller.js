@@ -146,7 +146,7 @@ module.exports = {
                 _id: resetUser._id
             }
 
-            const token = jwt.sign (payload, resetToken, {expiresIn: 600000})
+            const token = jwt.sign (payload, resetToken, {expiresIn: 60})
            
             const link = `http://foodgramltd.herokuapp.com/reset-password/${resetUser._id}/${token}`
 
