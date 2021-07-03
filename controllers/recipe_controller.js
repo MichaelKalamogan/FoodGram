@@ -31,9 +31,8 @@ module.exports = {
         let recipes = []
 
         recipes = await RecipeModel.find()
-
-        req.flash('success_message', 'Successfully Logged Out.')
-        res.render('index', { success_message: req.flash('success_message'), recipes: recipes })
+        res.redirect('/recipes/home')
+        
     },
 
     contact: (req, res) => {
